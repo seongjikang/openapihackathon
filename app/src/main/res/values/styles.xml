@@ -6,6 +6,9 @@
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
+		<item name="editTextStyle">@style/CustomEditText</item>
+		<item name="android:textViewStyle">@style/CustomTextView</item>
+		<item name="buttonStyle">@style/CustomButton</item>
 	</style>
 
 	<style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -18,6 +21,34 @@
 	<style name="AppTheme.NoActionBar">
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
+		<item name="editTextStyle">@style/CustomEditText</item>
+		<item name="android:textViewStyle">@style/CustomTextView</item>
+		<item name="buttonStyle">@style/CustomButton</item>
+	</style>
+
+	<style name="CustomTextView" parent="@android:style/Widget.DeviceDefault.TextView">
+		<item name="android:fontFamily">@font/nanum_barun_gothic</item>
+	</style>
+
+	<style name="CustomEditText" parent="@android:style/Widget.DeviceDefault.EditText">
+		<item name="android:fontFamily">@font/nanum_barun_gothic</item>
+	</style>
+
+	<style name="CustomButton" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+		<item name="android:fontFamily">@font/nanum_barun_gothic</item>
+	</style>
+
+	<style name="EditTextStyle">
+		<!--포커스 되어있지 않은 경우 밑줄색-->
+		<item name="colorControlNormal">@color/colorNormalBlack</item>
+		<!--포커스된 밑줄색-->
+		<item name="colorControlActivated">@color/colorSigBlue</item>
+		<!--hint 글씨색-->
+		<item name="android:textColorHint">@color/colorNormalBlack</item>
+		<!--텍스트 색-->
+		<item name="android:textColor">@color/colorNormalBlack</item>
+		<!--커서 색-->
+		<item name="android:textCursorDrawable">@color/colorNormalBlack</item>
 	</style>
 
 </resources>

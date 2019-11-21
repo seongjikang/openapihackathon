@@ -1,8 +1,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
 	android:opacity="opaque">
 	<item android:drawable="@color/colorSigBlue"/>
-	<item>
-		<bitmap android:src="@drawable/splash_man"
-			android:gravity="center"/>
-	</item>
+	<item android:drawable="@drawable/icon_coin" android:gravity="center" android:bottom="160dp"/>
+	<item android:drawable="@drawable/icon_splash_man" android:gravity="center" />
+	<item android:drawable="@drawable/splash_name" android:gravity="center" android:top="172dp" android:width="138dp" android:height="30dp"/>
 </layer-list>
