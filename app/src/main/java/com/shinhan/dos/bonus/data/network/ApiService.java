@@ -15,8 +15,16 @@ import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
 public interface ApiService {
-	public static final String URL = "http://로컬";
+	public static final String URL = "http://10.3.17.188:3338";
 
+	/*************************
+	 * 카드
+	 *************************/
+	@POST("/card/cardUsage")
+	public Call<Map> getCardUsage(@Body Map<String, String> params);
+
+	/*
+	// 샘플코드 ..
 	// 유저 전체 조회
 	@POST("/v1/user/join")
 	public Call<JsonObject> getUserList();
@@ -35,4 +43,5 @@ public interface ApiService {
 	@FormUrlEncoded // POST에만 붙는다고 한다.
 	@POST("/oauth/2.0/token")
 	public Call<Map> token(@FieldMap Map<String, String> params);
+	*/
 }
