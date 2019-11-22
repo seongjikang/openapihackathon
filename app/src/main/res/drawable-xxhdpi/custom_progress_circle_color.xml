@@ -10,7 +10,7 @@
 		<gradient
 			android:angle="45"
 			android:endColor="@color/colorSigBlue"
-			android:centerColor="@color/colorTextBlue"
+			android:centerColor="@color/colorCircleGrad"
 			android:startColor="@color/colorTextBlue"
 			android:type="sweep"
 			android:useLevel="false" />

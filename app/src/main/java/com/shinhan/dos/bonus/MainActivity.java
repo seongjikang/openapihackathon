@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.gson.JsonObject;
 import com.shinhan.dos.bonus.data.DataResult;
 import com.shinhan.dos.bonus.data.DataResultImpl;
 
@@ -41,27 +42,14 @@ public class MainActivity extends AppCompatActivity {
 		setPercent(80);
 	}
 
-	// API 호출 샘플임!! 카드
-	private void callCardApi() {
-		Map params = new LinkedHashMap<>();
-		params.put("hpno", "01071444074");
-		DataResult dataResult = new DataResultImpl();
-		dataResult.getCardUsage(new Callback<Map>() {
-			@Override
-			public void onResponse(Call<Map> call, Response<Map> response) {
-				Log.d(TAG, response.toString());
-			}
-
-			@Override
-			public void onFailure(Call<Map> call, Throwable t) {
-				Log.d(TAG, "FAIL....");
-			}
-		}, params);
-	}
-
 	private void initView() {
 		bottomSheet = findViewById(R.id.bottom_sheet);
 		mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+
+		mProgressBar = findViewById(R.id.progress_bar);
+		mTvPercent = findViewById(R.id.tv_percent);
+		mLlBottomFold = findViewById(R.id.ll_bottom_fold);
+
 		/*mBottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 			@Override
 			public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -78,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
 			}
 		});*/
-
-		mProgressBar = findViewById(R.id.progress_bar);
-		mTvPercent = findViewById(R.id.tv_percent);
-		mLlBottomFold = findViewById(R.id.ll_bottom_fold);
 	}
 
 	private void setPercent(int percent) {

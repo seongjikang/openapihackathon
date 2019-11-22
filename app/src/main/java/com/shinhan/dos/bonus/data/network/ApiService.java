@@ -15,13 +15,48 @@ import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
 public interface ApiService {
-	public static final String URL = "http://10.3.17.188:3338";
+	public static final String URL = "http://10.3.17.188:3339";
 
 	/*************************
 	 * 카드
 	 *************************/
+	/*
+	 * 월별 카드 사용 내역 - 3338
+	 */
 	@POST("/card/cardUsage")
-	public Call<Map> getCardUsage(@Body Map<String, String> params);
+	public Call<JsonObject> getCardUsage(@Body Map<String, String> params);
+
+	/*************************
+	 * 주식
+	 *************************/
+	/*
+	 * 내 주식 - 3339
+	 */
+	@POST("/invest/investUsage")
+	public Call<JsonObject> getInvestUsage(@Body Map<String, String> params);
+
+	/*************************
+	 * 은행
+	 *************************/
+	/*
+	 * 내 주택청약, 연금저축, 펀드 조회 - 3338
+	 */
+	@POST("/bank/myAccount")
+	public Call<JsonObject> getMyAccount(@Body Map<String, String> params);
+
+	/*************************
+	 * 보험
+	 *************************/
+	/*
+	 * 내 보험 - 3339
+	 */
+	@POST("/life/lifeUsage")
+	public Call<JsonObject> getLifeUsage(@Body Map<String, String> params);
+
+
+
+
+
 
 	/*
 	// 샘플코드 ..

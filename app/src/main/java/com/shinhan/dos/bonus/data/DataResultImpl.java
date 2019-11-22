@@ -11,12 +11,27 @@ import retrofit2.Callback;
 public class DataResultImpl implements DataResult {
 	private ApiServiceFactory apiServiceFactory = new ApiServiceFactory();
 
-	/*************************
-	 * 카드
-	 *************************/
 	@Override
-	public void getCardUsage(Callback<Map> callback, Map<String, String> params) {
-		Call<Map> call = apiServiceFactory.makeApiService().getCardUsage(params);
+	public void getCardUsage(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getCardUsage(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getInvestUsage(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getInvestUsage(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getMyAccount(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getMyAccount(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getLifeUsage(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getLifeUsage(params);
 		call.enqueue(callback);
 	}
 
