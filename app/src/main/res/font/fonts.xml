@@ -40,4 +40,14 @@
 		android:font="@font/nanum_square_extra_bold"
 		android:fontStyle="normal"
 		android:fontWeight="400" />
+
+	<font
+		android:font="@font/hangeul_nuri_regular"
+		android:fontStyle="normal"
+		android:fontWeight="400" />
+
+	<font
+		android:font="@font/hangeul_nuri_bold"
+		android:fontStyle="normal"
+		android:fontWeight="400" />
 </font-family>
