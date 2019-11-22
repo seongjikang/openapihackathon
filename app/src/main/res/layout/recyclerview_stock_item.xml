@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="170dp"
+    >
+    <RelativeLayout
+        android:id="@+id/stock_item_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_stock_list_t"
+        android:padding="45dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/stock_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            >
+            <TextView
+                android:id="@+id/stock_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주식이름"/>
+            <TextView
+                android:id="@+id/stock_currentvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/stock_change_rate"
+                android:textColor="@color/colorStockUp"
+                android:text="7,270"/>
+
+            <TextView
+                android:id="@+id/stock_change_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/colorStockUp"
+                android:text="+ 13%"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+
+            >
+            <TextView
+                android:id="@+id/stock_subscribe1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/colorTextPlain"
+                android:text="셜명입니다 어쩌구 저쩌구 얼씨구 절씨구"/>
+            <TextView
+                android:id="@+id/stock_subscribe2"
+                android:layout_below="@+id/stock_subscribe1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextPlain"
+                android:text="셜명입니다 어쩌구 저쩌구 얼씨구 절씨구"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

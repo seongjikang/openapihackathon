@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserInfoActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:id="@+id/view_userinfo_head"
+        >
+
+        <TextView
+            android:id="@+id/userinfo_title"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:text="소득정보 추가/수정"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextPlain"/>
+
+        <ImageView
+            android:id="@+id/stock_question_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/userinfo_title"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_question"/>
+        <TextView
+            android:id="@+id/userinfo_username_txt"
+            android:layout_below="@id/userinfo_title"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="강성지"
+            android:textSize="15sp"
+            android:textColor="@color/colorStockDown"/>
+        <TextView
+            android:layout_below="@id/userinfo_title"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/userinfo_username_txt"
+            android:text="님 주식보유 현황입니다."
+            android:textSize="15sp"
+            android:textColor="@color/colorTextPlain"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
