@@ -15,4 +15,6 @@
 	<color name="colorTextPlain">#707070</color>
 	<color name="colorStockUp">#FF6A6A</color>
 	<color name="colorStockDown">#0A71E8</color>
+	<color name="colorTextBlue">#1064C4</color>
+	<color name="colorCircleBg">#7FC4FD</color>
 </resources>

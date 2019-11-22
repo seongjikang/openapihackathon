@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -9,118 +9,955 @@
 	tools:context=".MainActivity">
 
 	<LinearLayout
-		android:id="@+id/ll_top_total"
-		style="@style/ElevationLinearLayoutStyle"
-		android:layout_marginLeft="16dp"
-		android:layout_marginTop="28dp"
-		android:layout_marginRight="16dp"
-		android:background="@drawable/background_ll_white_shadow"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
 		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="16dp">
+			android:id="@+id/ll_top_total"
+			style="@style/ElevationLinearLayoutStyle"
+			android:layout_marginLeft="16dp"
+			android:layout_marginTop="57dp"
+			android:layout_marginRight="16dp"
+			android:background="@drawable/background_ll_white_shadow"
+			android:orientation="vertical"
+			android:paddingBottom="34dp">
 
-			<TextView
-				style="@style/BlueTextViewStyle"
-				android:text="최서문" />
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="16dp"
+				android:gravity="center_vertical">
 
-			<TextView
-				style="@style/PlainTextViewStyle"
-				android:layout_marginLeft="04dp"
-				android:text="님 13월 명세서 입니다." />
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1">
+
+					<TextView
+						style="@style/BlueTextViewStyle"
+						android:text="최서문"
+						android:textSize="19sp" />
+
+					<TextView
+						style="@style/PlainTextViewStyle"
+						android:layout_marginLeft="04dp"
+						android:text="님 13월 명세서 입니다."
+						android:textSize="17sp" />
+				</LinearLayout>
+
+				<ImageView
+					android:layout_width="35dp"
+					android:layout_height="35dp"
+					android:src="@drawable/icon_pencil" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="18dp"
+				android:gravity="center_horizontal|bottom">
+
+				<TextView
+					style="@style/PlainTextViewStyle"
+					android:text="1,000,000"
+					android:textSize="40sp" />
+
+				<TextView
+					style="@style/PlainTextViewStyle"
+					android:layout_marginLeft="04dp"
+					android:text="원"
+					android:textSize="20sp" />
+			</LinearLayout>
 		</LinearLayout>
 
 		<LinearLayout
+			android:id="@+id/ll_middle_buttons"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
-			android:gravity="center_horizontal|bottom">
+			android:background="@android:color/transparent">
 
-			<TextView
-				style="@style/PlainTextViewStyle"
-				android:text="1,000,000"
-				android:textSize="40sp" />
+			<LinearLayout
+				style="@style/ElevationLinearLayoutStyle"
+				android:layout_width="0dp"
+				android:layout_marginLeft="16dp"
+				android:layout_marginRight="04dp"
+				android:layout_marginBottom="30dp"
+				android:layout_weight="1"
+				android:background="@drawable/background_ll_white_shadow"
+				android:gravity="center"
+				android:orientation="vertical">
 
-			<TextView
-				style="@style/PlainTextViewStyle"
+				<ImageView
+					android:layout_width="45dp"
+					android:layout_height="45dp"
+					android:src="@drawable/icon_main_gps" />
+
+				<TextView
+					style="@style/PlainTextViewStyle"
+					android:layout_marginTop="08dp"
+					android:text="주변에서 공제받기"
+					android:textSize="10sp" />
+			</LinearLayout>
+
+			<LinearLayout
+				style="@style/ElevationLinearLayoutStyle"
+				android:layout_width="0dp"
 				android:layout_marginLeft="04dp"
-				android:text="원"
-				android:textSize="20sp" />
+				android:layout_marginRight="04dp"
+				android:layout_marginBottom="30dp"
+				android:layout_weight="1"
+				android:background="@drawable/background_ll_white_shadow"
+				android:gravity="center"
+				android:orientation="vertical">
+
+				<ImageView
+					android:layout_width="45dp"
+					android:layout_height="45dp"
+					android:src="@drawable/icon_main_stock" />
+
+				<TextView
+					style="@style/PlainTextViewStyle"
+					android:layout_marginTop="08dp"
+					android:text="주식 공제대상 조회"
+					android:textSize="10sp" />
+			</LinearLayout>
+
+			<LinearLayout
+				style="@style/ElevationLinearLayoutStyle"
+				android:layout_width="0dp"
+				android:layout_marginLeft="04dp"
+				android:layout_marginRight="16dp"
+				android:layout_marginBottom="30dp"
+				android:layout_weight="1"
+				android:background="@drawable/background_ll_white_shadow"
+				android:gravity="center"
+				android:orientation="vertical">
+
+				<ImageView
+					android:layout_width="45dp"
+					android:layout_height="45dp"
+					android:src="@drawable/icon_main_insurance" />
+
+				<TextView
+					style="@style/PlainTextViewStyle"
+					android:layout_marginTop="08dp"
+					android:text="보장성보험 확인"
+					android:textSize="10sp" />
+			</LinearLayout>
 		</LinearLayout>
 	</LinearLayout>
 
-	<LinearLayout
-		android:id="@+id/ll_middle_buttons"
+	<!--Bottom Sheet-->
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/bottom_sheet"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="16dp"
-		android:layout_marginTop="16dp"
-		android:layout_marginRight="16dp"
-		android:background="@null">
+		android:background="@null"
+		app:behavior_hideable="false"
+		app:behavior_peekHeight="400dp"
+		app:layout_behavior="@string/bottom_sheet_behavior">
 
 		<LinearLayout
-			style="@style/ElevationLinearLayoutStyle"
-			android:layout_width="0dp"
-			android:layout_marginRight="04dp"
-			android:layout_weight="1"
-			android:background="@drawable/background_ll_white_shadow"
-			android:gravity="center"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
-			<ImageView
-				android:layout_width="45dp"
-				android:layout_height="45dp"/>
+			<!--접은 상태-->
+			<LinearLayout
+				android:id="@+id/ll_bottom_fold"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/bg_bottom_view"
+				android:orientation="vertical">
 
-			<TextView
-				style="@style/PlainTextViewStyle"
-				android:layout_marginTop="08dp"
-				android:text="소득정보 추가/수정"
-				android:textSize="10sp" />
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="50dp"
+					android:orientation="vertical">
+
+					<FrameLayout
+						android:layout_width="match_parent"
+						android:layout_height="180dp">
+
+						<ProgressBar
+							android:id="@+id/progress_bar"
+							style="@android:style/Widget.ProgressBar.Horizontal"
+							android:layout_width="180dp"
+							android:layout_height="180dp"
+							android:layout_gravity="center_horizontal"
+							android:background="@drawable/custom_progress_circle_shape"
+							android:indeterminate="false"
+							android:max="100"
+							android:progress="70"
+							android:progressDrawable="@drawable/custom_progress_circle_color" />
+
+						<LinearLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:gravity="center">
+
+							<TextView
+								android:id="@+id/tv_percent"
+								style="@style/PlainTextViewStyle"
+								android:text="58"
+								android:textSize="35sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="%"
+								android:textSize="35sp" />
+						</LinearLayout>
+					</FrameLayout>
+
+					<ImageView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_horizontal"
+						android:src="@drawable/txt_main_percent" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="36dp">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:layout_weight="1"
+							android:gravity="center"
+							android:orientation="vertical">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="3,000원"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/BlueTextViewStyle"
+								android:layout_marginTop="04dp"
+								android:text="공제총액"
+								android:textSize="18sp"
+								android:textStyle="bold" />
+						</LinearLayout>
+
+						<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:src="@drawable/icon_long" />
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:layout_weight="1"
+							android:gravity="center"
+							android:orientation="vertical">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="3,000,000원"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/BlueTextViewStyle"
+								android:layout_marginTop="04dp"
+								android:text="공제 가능금액"
+								android:textSize="18sp"
+								android:textStyle="bold" />
+						</LinearLayout>
+					</LinearLayout>
+				</LinearLayout>
+			</LinearLayout>
+
+			<!--편 상태-->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/colorWhite"
+				android:orientation="vertical">
+
+				<!--카드공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_card" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="카드 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="08dp">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_green" />
+						</FrameLayout>
+					</LinearLayout>
+				</LinearLayout>
+				<!--카드공제-->
+
+				<!--주식공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_stock" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="주식 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+					</LinearLayout>
+				</LinearLayout>
+				<!--주식공제-->
+
+				<!--보험공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_insurance" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="보험 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+					</LinearLayout>
+				</LinearLayout>
+				<!--보험공제-->
+
+				<!--대중교통공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_bus" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="대중교통 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+					</LinearLayout>
+				</LinearLayout>
+				<!--대중교통공제-->
+
+				<!--전통시장공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_market" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="전통시장 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+					</LinearLayout>
+				</LinearLayout>
+				<!--전통시장공제-->
+
+				<!--irp/연금저축 공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_irp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="IRP 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+					</LinearLayout>
+				</LinearLayout>
+				<!--irp/연금저축 공제-->
+
+				<!--주택청약공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_house" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="주택청약 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+					</LinearLayout>
+				</LinearLayout>
+				<!--주택청약공제-->
+
+				<!--펀드공제-->
+				<LinearLayout
+					style="@style/ElevationLinearLayoutStyle"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="08dp"
+					android:layout_marginRight="16dp"
+					android:layout_marginBottom="08dp"
+					android:background="@drawable/background_ll_white_shadow"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<ImageView
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:src="@drawable/icon_list_fund" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="펀드 공제"
+								android:textSize="15sp" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:orientation="vertical">
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_blue" />
+						</FrameLayout>
+
+					</LinearLayout>
+				</LinearLayout>
+				<!--펀드공제-->
+			</LinearLayout>
 		</LinearLayout>
-
-		<LinearLayout
-			style="@style/ElevationLinearLayoutStyle"
-			android:layout_width="0dp"
-			android:layout_marginLeft="04dp"
-			android:layout_marginRight="04dp"
-			android:layout_weight="1"
-			android:background="@drawable/background_ll_white_shadow"
-			android:gravity="center"
-			android:orientation="vertical">
-
-			<ImageView
-				android:layout_width="45dp"
-				android:layout_height="45dp" />
-
-			<TextView
-				style="@style/PlainTextViewStyle"
-				android:layout_marginTop="08dp"
-				android:text="소득정보 추가/수정"
-				android:textSize="10sp" />
-		</LinearLayout>
-
-		<LinearLayout
-			style="@style/ElevationLinearLayoutStyle"
-			android:layout_width="0dp"
-			android:layout_marginLeft="04dp"
-			android:layout_weight="1"
-			android:background="@drawable/background_ll_white_shadow"
-			android:gravity="center"
-			android:orientation="vertical">
-
-			<ImageView
-				android:layout_width="45dp"
-				android:layout_height="45dp"/>
-
-			<TextView
-				style="@style/PlainTextViewStyle"
-				android:layout_marginTop="08dp"
-				android:text="소득정보 추가/수정"
-				android:textSize="10sp" />
-		</LinearLayout>
-	</LinearLayout>
-
-	<!--임시 뷰. 레이아웃 ll말고 다른거로 바꿔야 함-->
-</LinearLayout>
+	</androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
