@@ -7,10 +7,10 @@ import java.util.Map;
 import retrofit2.Callback;
 
 public interface DataResult {
-	/*************************
-	 * 카드
-	 *************************/
-	public void getCardUsage(Callback<Map> callback, Map<String, String> params);
+	public void getCardUsage(Callback<JsonObject> callback, Map<String, String> params);
+	public void getInvestUsage(Callback<JsonObject> callback, Map<String, String> params);
+	public void getMyAccount(Callback<JsonObject> callback, Map<String, String> params);
+	public void getLifeUsage(Callback<JsonObject> callback, Map<String, String> params);
 /*
 	// 샘플코드 ..
 	public void getUserList(Callback<JsonObject> callback);
