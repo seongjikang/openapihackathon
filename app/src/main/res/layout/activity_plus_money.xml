@@ -1,9 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlusMoneyActivity">
+    tools:context=".PlusMoney.PlusMoneyActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:id="@+id/view_plus_money_head"
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/product_type_txt"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="카드"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextPlain"/>
+        <TextView
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/product_type_txt"
+            android:text="상품을 통해"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextPlain"/>
+
+
+        <TextView
+            android:id="@+id/plus_money_amount"
+            android:layout_below="@id/product_type_txt"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="120"
+            android:textSize="29sp"
+            android:textColor="@color/colorStockDown"/>
+        <TextView
+            android:layout_alignBottom="@+id/plus_money_amount"
+            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/plus_money_amount"
+            android:text="만원 더받기"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextPlain"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/tab_btn_bar"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_below="@+id/view_plus_money_head">
+        <ImageView
+            android:id="@+id/plus_card_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/icon_card_prdt"/>
+        <ImageView
+            android:id="@+id/plus_stock_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/icon_stock_prdt_dis"/>
+        <ImageView
+            android:id="@+id/plus_insurance_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/icon_insurance_prdt_dis"/>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_btn_bar"
+        android:padding="20dp">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/plus_ViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </androidx.viewpager.widget.ViewPager>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

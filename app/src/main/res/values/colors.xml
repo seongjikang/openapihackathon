@@ -13,4 +13,6 @@
 	<color name="colorDisableButton">#AAAAAA</color>
 	<color name="colorTextGray">#8E8E8E</color>
 	<color name="colorTextPlain">#707070</color>
+	<color name="colorStockUp">#FF6A6A</color>
+	<color name="colorStockDown">#0A71E8</color>
 </resources>
