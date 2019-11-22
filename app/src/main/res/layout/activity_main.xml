@@ -71,8 +71,7 @@
 
 			<ImageView
 				android:layout_width="45dp"
-				android:layout_height="45dp"
-				android:src="@drawable/icon_main_pencil" />
+				android:layout_height="45dp"/>
 
 			<TextView
 				style="@style/PlainTextViewStyle"
@@ -93,8 +92,7 @@
 
 			<ImageView
 				android:layout_width="45dp"
-				android:layout_height="45dp"
-				android:src="@drawable/icon_main_stock" />
+				android:layout_height="45dp" />
 
 			<TextView
 				style="@style/PlainTextViewStyle"
@@ -114,8 +112,7 @@
 
 			<ImageView
 				android:layout_width="45dp"
-				android:layout_height="45dp"
-				android:src="@drawable/icon_main_insurance" />
+				android:layout_height="45dp"/>
 
 			<TextView
 				style="@style/PlainTextViewStyle"
@@ -126,11 +123,4 @@
 	</LinearLayout>
 
 	<!--임시 뷰. 레이아웃 ll말고 다른거로 바꿔야 함-->
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_marginTop="16dp"
-		android:background="@drawable/main_bottom_white">
-
-	</LinearLayout>
 </LinearLayout>
