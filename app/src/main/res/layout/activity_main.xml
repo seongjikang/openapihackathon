@@ -1,18 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="@color/colorSigBlue"
+	android:orientation="vertical"
 	tools:context=".MainActivity">
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Hello World!"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
+	<LinearLayout
+		android:id="@+id/ll_top_total"
+		style="@style/ElevationLinearLayoutStyle"
+		android:layout_marginLeft="16dp"
+		android:layout_marginTop="28dp"
+		android:layout_marginRight="16dp"
+		android:background="@drawable/background_ll_white_shadow"
+		android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="16dp">
+
+			<TextView
+				style="@style/BlueTextViewStyle"
+				android:text="최서문" />
+
+			<TextView
+				style="@style/PlainTextViewStyle"
+				android:layout_marginLeft="04dp"
+				android:text="님 13월 명세서 입니다." />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:gravity="center_horizontal|bottom">
+
+			<TextView
+				style="@style/PlainTextViewStyle"
+				android:text="1,000,000"
+				android:textSize="40sp" />
+
+			<TextView
+				style="@style/PlainTextViewStyle"
+				android:layout_marginLeft="04dp"
+				android:text="원"
+				android:textSize="20sp" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/ll_middle_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="16dp"
+		android:layout_marginTop="16dp"
+		android:layout_marginRight="16dp"
+		android:background="@null">
+
+		<LinearLayout
+			style="@style/ElevationLinearLayoutStyle"
+			android:layout_width="0dp"
+			android:layout_marginRight="04dp"
+			android:layout_weight="1"
+			android:background="@drawable/background_ll_white_shadow"
+			android:gravity="center"
+			android:orientation="vertical">
+
+			<ImageView
+				android:layout_width="45dp"
+				android:layout_height="45dp"
+				android:src="@drawable/icon_main_pencil" />
+
+			<TextView
+				style="@style/PlainTextViewStyle"
+				android:layout_marginTop="08dp"
+				android:text="소득정보 추가/수정"
+				android:textSize="10sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/ElevationLinearLayoutStyle"
+			android:layout_width="0dp"
+			android:layout_marginLeft="04dp"
+			android:layout_marginRight="04dp"
+			android:layout_weight="1"
+			android:background="@drawable/background_ll_white_shadow"
+			android:gravity="center"
+			android:orientation="vertical">
+
+			<ImageView
+				android:layout_width="45dp"
+				android:layout_height="45dp"
+				android:src="@drawable/icon_main_stock" />
+
+			<TextView
+				style="@style/PlainTextViewStyle"
+				android:layout_marginTop="08dp"
+				android:text="소득정보 추가/수정"
+				android:textSize="10sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/ElevationLinearLayoutStyle"
+			android:layout_width="0dp"
+			android:layout_marginLeft="04dp"
+			android:layout_weight="1"
+			android:background="@drawable/background_ll_white_shadow"
+			android:gravity="center"
+			android:orientation="vertical">
+
+			<ImageView
+				android:layout_width="45dp"
+				android:layout_height="45dp"
+				android:src="@drawable/icon_main_insurance" />
+
+			<TextView
+				style="@style/PlainTextViewStyle"
+				android:layout_marginTop="08dp"
+				android:text="소득정보 추가/수정"
+				android:textSize="10sp" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<!--임시 뷰. 레이아웃 ll말고 다른거로 바꿔야 함-->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginTop="16dp"
+		android:background="@drawable/main_bottom_white">
+
+	</LinearLayout>
+</LinearLayout>
