@@ -64,6 +64,7 @@ public class ModifySalaryActivity extends AppCompatActivity {
                 intent.putExtra("name", mName);
                 intent.putExtra("hpno", mHpno);
                 startActivity(intent);
+                finish();
             }
         });
     }
