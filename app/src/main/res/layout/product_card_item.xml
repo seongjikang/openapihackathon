@@ -43,7 +43,7 @@
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
+
                 android:layout_above="@+id/txt_layout"
                 android:src="@drawable/card_img"/>
             <RelativeLayout
@@ -53,6 +53,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="50dp"
+                android:padding="13dp"
                 >
                 <TextView
                     android:id="@+id/product_name"
@@ -60,8 +61,10 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextPlain"
                     android:text="Product_name"
+                    android:textStyle="bold"
                     android:layout_centerHorizontal="true"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:layout_marginBottom="5dp"/>
 
                 <TextView
                     android:id="@+id/product_subscribe"

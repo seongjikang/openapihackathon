@@ -1,4 +1,4 @@
-package com.shinhan.dos.bonus.PlusMoney.Fragment;
+package com.shinhan.dos.bonus.PlusMoney.Fragment.FragCard;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +14,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder>{
         ArrayList<ProductData> productData;
         View.OnClickListener clickListener;
 
-    public ProductAdapter(ArrayList<ProductData> authorDatas, View.OnClickListener clickListener) {
-        this.productData = authorDatas;
+    public ProductAdapter(ArrayList<ProductData> cardData, View.OnClickListener clickListener) {
+        this.productData = cardData;
         this.clickListener = clickListener;
     }
 
@@ -31,8 +31,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder>{
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
 
-        holder.product_name.setText(productData.get(position).product_name);
-        holder.product_subscribe.setText(productData.get(position).product_subscribe);
+        //holder.product_img.setImageResource(R.drawable.card_img);
+        holder.product_name.setText(productData.get(position).cardName);
+        if(productData.get(position).cardBonus.size()>0){
+            if(productData.get(position).cardBonus.get(0).title.equals("")){
+                holder.product_subscribe.setText(productData.get(position).cardBonus.get(0).content+ " ... 외 "+productData.get(position).cardBonus.size()+"가지 혜택");
+            }else{
+                holder.product_subscribe.setText(productData.get(position).cardBonus.get(0).title+ " ... 외 "+productData.get(position).cardBonus.size()+"가지 혜택");
+            }
+
+        }
+
 
 
     }
