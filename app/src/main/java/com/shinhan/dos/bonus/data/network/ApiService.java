@@ -15,7 +15,6 @@ import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
 public interface ApiService {
-	public static final String URL = "http://10.3.17.188:3339";
 
 	/*************************
 	 * 카드
@@ -26,6 +25,18 @@ public interface ApiService {
 	@POST("/card/cardUsage")
 	public Call<JsonObject> getCardUsage(@Body Map<String, String> params);
 
+	/*
+	 * 카드상품조회 - 3338
+	 */
+	@POST("/card/cardList")
+	public Call<JsonObject> getCardList(@Body Map<String, String> params);
+
+	/*
+	 * 현금영수증 - 3339
+	 */
+	@POST("/life/getcash")
+	public Call<JsonObject> getCash(@Body Map<String, String> params);
+
 	/*************************
 	 * 주식
 	 *************************/
@@ -34,6 +45,12 @@ public interface ApiService {
 	 */
 	@POST("/invest/investUsage")
 	public Call<JsonObject> getInvestUsage(@Body Map<String, String> params);
+
+	/*
+	 * 공제가능주식 - 3339
+	 */
+	@POST("/invest/searchInvest")
+	public Call<JsonObject> searchInvest(@Body Map<String, String> params);
 
 	/*************************
 	 * 은행
@@ -53,7 +70,23 @@ public interface ApiService {
 	@POST("/life/lifeUsage")
 	public Call<JsonObject> getLifeUsage(@Body Map<String, String> params);
 
+	/*************************
+	 * 대중교통
+	 *************************/
+	/*
+	 * 대중교통 - 3339
+	 */
+	@POST("/life/getPublicTransfer")
+	public Call<JsonObject> getPublicTransfer(@Body Map<String, String> params);
 
+	/*************************
+	 * 전통시장
+	 *************************/
+	/*
+	 * 전통시장 - 3339
+	 */
+	@POST("/life/getTraditionalMarket")
+	public Call<JsonObject> getTraditionalMarket(@Body Map<String, String> params);
 
 
 
