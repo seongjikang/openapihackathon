@@ -39,6 +39,7 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
 
     ImageView question_btn;
     private TextView tv_name;
+    Intent intetnt;
 
     private SharedPreferences pref;
 
@@ -51,6 +52,9 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
         question_btn =(ImageView)findViewById(R.id.question_img);
         question_btn.setOnClickListener(question);
         tv_name = findViewById(R.id.stock_username_txt);
+        intetnt = getIntent();
+        tv_name.setText(intetnt.getExtras().getString("user_name"));
+        //tv_name.setText(result.getCustomerName());
 
         //레이아웃 매니저 설정
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -79,7 +83,7 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
 
                         adapter.notifyDataSetChanged();
 
-                        tv_name.setText(result.getCustomerName());
+                        //tv_name.setText(result.getCustomerName());
 
                     }
 

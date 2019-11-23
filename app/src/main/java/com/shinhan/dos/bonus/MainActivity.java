@@ -607,10 +607,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				break;
 			case R.id.ll_middle_stock:
 				intent = new Intent(MainActivity.this, StockInquiryActivity.class);
+				intent.putExtra("user_name", mCustomerName);
 				startActivity(intent);
 				break;
 			case R.id.ll_middle_insurance:
 				intent = new Intent(MainActivity.this, InsuranceInquiryActivity.class);
+				intent.putExtra("user_name", mCustomerName);
 				startActivity(intent);
 				break;
 			case R.id.ll_list_card:

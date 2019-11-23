@@ -39,6 +39,7 @@ public class StockInquiryActivity extends AppCompatActivity {
     private ArrayList<ArrayList<StockData>> stockData = new ArrayList<>();
     ResultDataBody result;
 
+    Intent intent;
     ImageView question_btn;
     private TextView tv_name;
 
@@ -52,6 +53,8 @@ public class StockInquiryActivity extends AppCompatActivity {
         question_btn =(ImageView)findViewById(R.id.question_img);
         question_btn.setOnClickListener(question);
         tv_name = findViewById(R.id.stock_username_txt);
+        intent = getIntent();
+        tv_name.setText(intent.getExtras().getString("user_name"));
 
         stockRecyclerview = (RecyclerView)findViewById(R.id.recyclerview_stock);
 
@@ -82,7 +85,7 @@ public class StockInquiryActivity extends AppCompatActivity {
 
                         adapter.notifyDataSetChanged();
 
-                        tv_name.setText(result.getCustomerName());
+
 
 
                     }
