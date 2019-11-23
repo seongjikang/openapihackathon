@@ -640,7 +640,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				startActivity(intent);*/
 				break;
 			case R.id.iv_input_my_money:
-				startActivity(new Intent(this, UserInfoActivity.class));
+//				startActivity(new Intent(this, UserInfoActivity.class));
+				startActivity(new Intent(this, ModifySalaryActivity.class));
 				break;
 		}
 	}
