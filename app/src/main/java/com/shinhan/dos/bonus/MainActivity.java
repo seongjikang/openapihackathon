@@ -616,6 +616,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			case R.id.ll_list_card:
 				intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
 				intent.putExtra("plus_card_money",mTotalCardLimit-mTotalCard);
+				intent.putExtra("plus_life_money", 100 - moneyToManwon((float)( deductInsuranceTotalAmount*0.132)));
 				startActivity(intent);
 				break;
 			/*case R.id.ll_list_stock:
@@ -625,7 +626,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			case R.id.ll_list_insurance:
 				intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
 				Log.i("insuranceMo",moneyToManwon((float)( deductInsuranceTotalAmount*0.132))+"");
-				intent.putExtra("plus_life_money", 100 - moneyToManwon((float)( deductInsuranceTotalAmount*0.4)));
+				intent.putExtra("plus_card_money",mTotalCardLimit-mTotalCard);
+				intent.putExtra("plus_life_money", 100 - moneyToManwon((float)( deductInsuranceTotalAmount*0.132)));
+				//intent.putExtra("plus_life_money", 100 - moneyToManwon((float)( deductInsuranceTotalAmount*0.4)));
 				startActivity(intent);
 				break;
 			case R.id.ll_list_bus:
