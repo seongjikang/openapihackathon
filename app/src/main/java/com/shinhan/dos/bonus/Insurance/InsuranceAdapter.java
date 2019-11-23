@@ -24,7 +24,7 @@ public InsuranceAdapter(ArrayList<InsuranceData> datas, View.OnClickListener cli
 public InsuranceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_insurance_item, parent, false);
 
-    InsuranceViewHolder viewHolder = new InsuranceViewHolder(view);
+        InsuranceViewHolder viewHolder = new InsuranceViewHolder(view);
         view.setOnClickListener(clickListener);
         return viewHolder;
         }
@@ -33,11 +33,10 @@ public InsuranceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 public void onBindViewHolder(InsuranceViewHolder holder, int position) {
 
 
-        holder.insurance_name_txt.setText(datas.get(position).insurance_name);
-        holder.insurance_type_txt.setText(datas.get(position).insurance_type_txt);
-        holder.total_insurance_amount.setText(String.valueOf(datas.get(position).total_insurance_amount));
-        holder.minus_tax_amount.setText(String.valueOf(datas.get(position).minus_tax_amount));
-        if(datas.get(position).is_insurance_valid==0){ // 공제 대상이 아닌경우
+        holder.insurance_name_txt.setText(datas.get(position).lifename);
+        holder.insurance_type_txt.setText(datas.get(position).description);
+        holder.total_insurance_amount.setText(String.valueOf(datas.get(position).amount));
+        if(datas.get(position).isDeduction.equals("0")){ // 공제 대상이 아닌경우
         holder.insurance_item_box.setBackgroundResource(R.drawable.bg_insurance_list_t);
         }else{
         holder.insurance_item_box.setBackgroundResource(R.drawable.bg_stock_list_f);
@@ -52,4 +51,4 @@ public int getItemCount() {
 
 
 
-        }
+}
