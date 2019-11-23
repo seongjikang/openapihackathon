@@ -58,19 +58,23 @@ public class PlusMoneyActivity extends AppCompatActivity {
                         plus_card_btn.setImageResource(R.drawable.icon_card_prdt);
                         plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                         plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
+                        product_type_txt.setText("카드");
+                        plus_money_amount.setText("120");
 
                         break;
                     case 1:
                         plus_card_btn.setImageResource(R.drawable.icon_card_prdt_dis);
                         plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt);
                         plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
-
+                        product_type_txt.setText("주식");
+                        plus_money_amount.setText("88");
                         break;
                     case 2:
                         plus_card_btn.setImageResource(R.drawable.icon_card_prdt_dis);
                         plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                         plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt);
-
+                        product_type_txt.setText("보험");
+                        plus_money_amount.setText("30");
                         break;
 
                 }
@@ -102,18 +106,20 @@ public class PlusMoneyActivity extends AppCompatActivity {
                     plus_card_btn.setImageResource(R.drawable.icon_card_prdt);
                     plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                     plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
-
+                    product_type_txt.setText("카드");
                     break;
                 case 1:
                     plus_card_btn.setImageResource(R.drawable.icon_card_prdt_dis);
                     plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt);
                     plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
+                    product_type_txt.setText("주식");
 
                     break;
                 case 2:
                     plus_card_btn.setImageResource(R.drawable.icon_card_prdt_dis);
                     plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                     plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt);
+                    product_type_txt.setText("보험");
 
                     break;
 
