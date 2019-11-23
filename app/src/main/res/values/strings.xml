@@ -3,4 +3,5 @@
 
     <string name="set_permission">권한 설정 후 이용해주세요.</string>
     <string name="setting">설정</string>
+    <string name="title_activity_modify_salary">ModifySalaryActivity</string>
 </resources>

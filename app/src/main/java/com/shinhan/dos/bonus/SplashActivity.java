@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -38,13 +39,26 @@ public class SplashActivity extends AppCompatActivity {
 
 	private void launchApp() {
 		checkPermissions();
-		getFinancialInfo();
+
+		SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+		Boolean initUser = pref.getBoolean("initUser", true);
+
+		if (initUser) {
+			setMySalaryInfo();
+		} else {
+			getFinancialInfo();
+		}
 	}
 
 	// TODO : 권한체크
 	private void checkPermissions() {
 //		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //		builder.setMessage(R.string.set_permission);
+	}
+
+	private void setMySalaryInfo() {
+		startActivity(new Intent(this, UserInfoActivity.class));
+		finish();
 	}
 
 	// 사용자정보 불러오기

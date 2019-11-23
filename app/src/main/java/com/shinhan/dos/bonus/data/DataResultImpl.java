@@ -83,6 +83,17 @@ public class DataResultImpl implements DataResult {
 		call.enqueue(callback);
 	}
 
+	@Override
+	public void getSalaryAmt(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getTotalSalaryAmt(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getName(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getCusName(params);
+		call.enqueue(callback);
+	}
 /*
 	// 샘플코드 ..
 	@Override

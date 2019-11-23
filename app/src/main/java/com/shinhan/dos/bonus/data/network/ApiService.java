@@ -106,6 +106,13 @@ public interface ApiService {
 	@POST("/bank/culture")
 	public Call<JsonObject> getCultureList(@Body Map<String, String> params);
 
+
+	@POST("/bank/salary")
+	public Call<JsonObject> getTotalSalaryAmt(@Body Map<String, String> params);
+
+	@POST("/bank/name")
+	public Call<JsonObject> getCusName(@Body Map<String, String> params);
+
 	/*
 	// 샘플코드 ..
 	// 유저 전체 조회

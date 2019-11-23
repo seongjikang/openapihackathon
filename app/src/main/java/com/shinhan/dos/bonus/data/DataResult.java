@@ -19,6 +19,8 @@ public interface DataResult {
 	public void getCulturePayment(Callback<JsonObject> callback, Map<String, String> params);
 	public void getRetailAtm(Callback<JsonObject> callback, Map<String, String> params);
 	public void getCultureList(Callback<JsonObject> callback, Map<String, String> params);
+	public void getSalaryAmt(Callback<JsonObject> callback, Map<String, String> params);
+	public void getName(Callback<JsonObject> callback, Map<String, String> params);
 /*
 	// 샘플코드 ..
 	public void getUserList(Callback<JsonObject> callback);

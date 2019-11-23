@@ -1,74 +1,83 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-	<!-- Base application theme. -->
-	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-		<!-- Customize your theme here. -->
-		<item name="colorPrimary">@color/colorPrimary</item>
-		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name="colorAccent">@color/colorAccent</item>
-		<item name="editTextStyle">@style/CustomEditText</item>
-		<item name="android:textViewStyle">@style/CustomTextView</item>
-		<item name="buttonStyle">@style/CustomButton</item>
-	</style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="editTextStyle">@style/CustomEditText</item>
+        <item name="android:textViewStyle">@style/CustomTextView</item>
+        <item name="buttonStyle">@style/CustomButton</item>
+    </style>
 
-	<style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-		<item name="windowNoTitle">true</item>
-		<item name="windowActionBar">false</item>
-		<item name="android:windowFullscreen">true</item>
-		<item name="android:windowBackground">@drawable/background_splash</item>
-	</style>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
 
-	<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
-		<item name="windowActionBar">false</item>
-		<item name="windowNoTitle">true</item>
-		<item name="android:windowBackground">@color/colorWhite</item>
-		<item name="editTextStyle">@style/CustomEditText</item>
-		<item name="android:textViewStyle">@style/CustomTextView</item>
-		<item name="buttonStyle">@style/CustomButton</item>
-	</style>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="editTextStyle">@style/CustomEditText</item>
+        <item name="android:textViewStyle">@style/CustomTextView</item>
+        <item name="buttonStyle">@style/CustomButton</item>
+    </style>
 
-	<style name="CustomTextView" parent="@android:style/Widget.DeviceDefault.TextView">
-		<item name="android:fontFamily">@font/hangeul_nuri_regular</item>
-	</style>
+    <style name="CustomTextView" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/hangeul_nuri_regular</item>
+    </style>
 
-	<style name="CustomEditText" parent="@android:style/Widget.DeviceDefault.EditText">
-		<item name="android:fontFamily">@font/hangeul_nuri_regular</item>
-	</style>
+    <style name="CustomEditText" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:fontFamily">@font/hangeul_nuri_regular</item>
+    </style>
 
-	<style name="CustomButton" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
-		<item name="android:fontFamily">@font/hangeul_nuri_regular</item>
-	</style>
+    <style name="CustomButton" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/hangeul_nuri_regular</item>
+    </style>
 
-	<style name="EditTextStyle">
-		<!--포커스 되어있지 않은 경우 밑줄색-->
-		<item name="colorControlNormal">@color/colorNormalBlack</item>
-		<!--포커스된 밑줄색-->
-		<item name="colorControlActivated">@color/colorSigBlue</item>
-		<!--hint 글씨색-->
-		<item name="android:textColorHint">@color/colorNormalBlack</item>
-		<!--텍스트 색-->
-		<item name="android:textColor">@color/colorNormalBlack</item>
-		<!--커서 색-->
-		<item name="android:textCursorDrawable">@color/colorNormalBlack</item>
-	</style>
+    <style name="EditTextStyle">
+        <!--포커스 되어있지 않은 경우 밑줄색-->
+        <item name="colorControlNormal">@color/colorNormalBlack</item>
+        <!--포커스된 밑줄색-->
+        <item name="colorControlActivated">@color/colorSigBlue</item>
+        <!--hint 글씨색-->
+        <item name="android:textColorHint">@color/colorNormalBlack</item>
+        <!--텍스트 색-->
+        <item name="android:textColor">@color/colorNormalBlack</item>
+        <!--커서 색-->
+        <item name="android:textCursorDrawable">@color/colorNormalBlack</item>
+    </style>
 
-	<style name="PlainTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textColor">@color/colorTextPlain</item>
-		<item name="android:textSize">14sp</item>
-	</style>
+    <style name="PlainTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextPlain</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 
-	<style name="BlueTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textColor">@color/colorTextBlue</item>
-		<item name="android:textSize">16sp</item>
-	</style>
+    <style name="BlueTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextBlue</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
-	<style name="ElevationLinearLayoutStyle">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:elevation" tools:targetApi="lollipop">16dp</item>
-	</style>
+    <style name="ElevationLinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation" tools:targetApi="lollipop">16dp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
