@@ -6,6 +6,7 @@ import androidx.core.widget.NestedScrollView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -63,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		setContentView(R.layout.activity_main);
 		initView();
 		setPercent(80);
+
+		SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+		SharedPreferences.Editor editor = pref.edit();
+		editor.putBoolean("initUser", false);
+		editor.commit();
 	}
 
 	private void initView() {
