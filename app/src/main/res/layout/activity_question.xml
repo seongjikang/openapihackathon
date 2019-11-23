@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:id="@+id/view_ques_head"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:text="소득공제 바로알기"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextPlain"/>
+
+        <TextView
+            android:id="@+id/question_type_txt"
+            android:layout_below="@id/title"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="주식공제"
+            android:textSize="15sp"
+            android:textColor="@color/colorStockDown"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_ques_head"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp"
+
+        >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/info_box"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            
+            android:padding="40dp">
+            <TextView
+                android:id="@+id/explain_field"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorTextPlain"
+                android:text="설명입니다 \n설명입니다 \n설명입니다 \n설명입니다
+                 \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다
+                  \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다
+                   \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다
+                    \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다
+                     \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다
+                      \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다
+                       \n설명입니다 \n설명입니다 \n설명입니다 \n설명입니다 \n"/>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

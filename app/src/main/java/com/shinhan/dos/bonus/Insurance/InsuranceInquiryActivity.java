@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.shinhan.dos.bonus.QuestionActivity;
 import com.shinhan.dos.bonus.R;
 import com.shinhan.dos.bonus.Stock.ResultDataBody;
 import com.shinhan.dos.bonus.Stock.StockAdapter;
@@ -32,11 +35,16 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<InsuranceData> insuranceData = new ArrayList<>();
 
+    ImageView question_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insurance_inquiry);
         insurancekRecyclerview = (RecyclerView) findViewById(R.id.recyclerview_insurance);
+
+        question_btn =(ImageView)findViewById(R.id.question_img);
+        question_btn.setOnClickListener(question);
 
         //레이아웃 매니저 설정
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -90,4 +98,13 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
 
         }
     };
+    public View.OnClickListener question = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+            intent.putExtra("to","보험");
+            startActivity(intent);
+
+        }
+    };
+
 }
