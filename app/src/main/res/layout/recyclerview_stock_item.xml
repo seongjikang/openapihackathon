@@ -23,6 +23,7 @@
                 android:id="@+id/stock_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextPlain"
                 android:text="주식이름"/>
             <TextView
                 android:id="@+id/stock_currentvalue"
@@ -50,17 +51,10 @@
             android:layout_alignParentBottom="true"
 
             >
+
             <TextView
                 android:id="@+id/stock_subscribe1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="7dp"
-                android:textColor="@color/colorTextPlain"
-                android:text="셜명입니다 어쩌구 저쩌구 얼씨구 절씨구"/>
-            <TextView
-                android:id="@+id/stock_subscribe2"
-                android:layout_below="@+id/stock_subscribe1"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextPlain"

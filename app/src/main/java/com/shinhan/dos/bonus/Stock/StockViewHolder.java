@@ -14,7 +14,7 @@ public class StockViewHolder extends RecyclerView.ViewHolder {
     TextView stock_currentvalue;
     TextView stock_change_rate;
     TextView stock_subscribe1;
-    TextView stock_subscribe2;
+    //TextView stock_subscribe2;
 
 
 
@@ -26,7 +26,7 @@ public class StockViewHolder extends RecyclerView.ViewHolder {
         stock_currentvalue = (TextView)itemView.findViewById(R.id.stock_currentvalue);;
         stock_change_rate = (TextView)itemView.findViewById(R.id.stock_change_rate);;
         stock_subscribe1= (TextView)itemView.findViewById(R.id.stock_subscribe1);;
-        stock_subscribe2= (TextView)itemView.findViewById(R.id.stock_subscribe2);;
+        //stock_subscribe2= (TextView)itemView.findViewById(R.id.stock_subscribe2);;
 
     }
 }
