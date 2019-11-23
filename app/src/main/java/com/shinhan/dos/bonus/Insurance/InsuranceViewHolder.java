@@ -13,7 +13,7 @@ public class InsuranceViewHolder extends RecyclerView.ViewHolder {
     TextView insurance_name_txt;
     TextView insurance_type_txt;
     TextView total_insurance_amount;
-    TextView minus_tax_amount;
+
 
 
 
@@ -24,7 +24,7 @@ public class InsuranceViewHolder extends RecyclerView.ViewHolder {
         insurance_name_txt = (TextView)itemView.findViewById(R.id.insurance_name_txt);;
         insurance_type_txt = (TextView)itemView.findViewById(R.id.insurance_type_txt);;
         total_insurance_amount = (TextView)itemView.findViewById(R.id.total_insurance_amount);;
-        minus_tax_amount= (TextView)itemView.findViewById(R.id.minus_tax_amount);;
+
 
     }
 }

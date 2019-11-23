@@ -5,13 +5,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.shinhan.dos.bonus.R;
+import com.shinhan.dos.bonus.Stock.ResultDataBody;
 import com.shinhan.dos.bonus.Stock.StockAdapter;
 import com.shinhan.dos.bonus.Stock.StockData;
+import com.shinhan.dos.bonus.data.DataResult;
+import com.shinhan.dos.bonus.data.DataResultImpl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class InsuranceInquiryActivity extends AppCompatActivity {
 
@@ -31,10 +43,38 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         insurancekRecyclerview.setLayoutManager(linearLayoutManager);
 
+        Map params = new LinkedHashMap<>();
+        params.put("hpno", "01071444074");
+        DataResult dataResult = new DataResultImpl();
+        dataResult.getLifeUsage(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//
+                if(response.isSuccessful()){
 
-        insuranceData.add(new InsuranceData(0, "신한생명", "무배당 신한인터넷 정기보험", 230000, 11000));
-        insuranceData.add(new InsuranceData(0, "신한생명", "무배당 신한인터넷 정기보험", 230000, 11000));
-        insuranceData.add(new InsuranceData(0, "신한생명", "무배당 신한인터넷 정기보험", 230000, 11000));
+                    Gson gson = new Gson();
+                    ResultInsuranceData result = gson.fromJson(response.body().get("dataBody"), ResultInsuranceData.class);
+
+                    result.getInsuranceList();
+                    insuranceData.addAll(result.insuranceList);
+                    adapter = new InsuranceAdapter(insuranceData, clickEvent);
+                    insurancekRecyclerview.setAdapter(adapter);
+
+                    adapter.notifyDataSetChanged();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d("STOCKJSON", "FAIL....");
+
+            }
+        }, params);
+
+
+
         adapter = new InsuranceAdapter(insuranceData, clickEvent);
         insurancekRecyclerview.setAdapter(adapter);
 
