@@ -14,8 +14,11 @@ public interface DataResult {
 	public void searchInvest(Callback<JsonObject> callback, Map<String, String> params);
 	public void getMyAccount(Callback<JsonObject> callback, Map<String, String> params);
 	public void getLifeUsage(Callback<JsonObject> callback, Map<String, String> params);
+	public void searchInsurance(Callback<JsonObject> callback, Map<String, String> params);
 	public void getPublicTransfer(Callback<JsonObject> callback, Map<String, String> params);
-	public void getTraditionalMarket(Callback<JsonObject> callback, Map<String, String> params);
+	public void getCulturePayment(Callback<JsonObject> callback, Map<String, String> params);
+	public void getRetailAtm(Callback<JsonObject> callback, Map<String, String> params);
+	public void getCultureList(Callback<JsonObject> callback, Map<String, String> params);
 /*
 	// 샘플코드 ..
 	public void getUserList(Callback<JsonObject> callback);

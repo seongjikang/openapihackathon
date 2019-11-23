@@ -354,7 +354,7 @@
 						android:layout_height="wrap_content"
 						android:layout_marginTop="10dp"
 						android:orientation="vertical">
-
+						<!--공제시작점-->
 						<FrameLayout
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
@@ -365,6 +365,7 @@
 								android:src="@drawable/bg_progress_bar" />
 
 							<ImageView
+								android:id="@+id/progress_card1"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:src="@drawable/icon_progress_blue" />
@@ -381,6 +382,24 @@
 								android:src="@drawable/bg_progress_bar" />
 
 							<ImageView
+								android:id="@+id/progress_card2"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/icon_progress_green" />
+						</FrameLayout>
+
+						<FrameLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="08dp">
+
+							<ImageView
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:src="@drawable/bg_progress_bar" />
+
+							<ImageView
+								android:id="@+id/progress_card3"
 								android:layout_width="match_parent"
 								android:layout_height="wrap_content"
 								android:src="@drawable/icon_progress_green" />
