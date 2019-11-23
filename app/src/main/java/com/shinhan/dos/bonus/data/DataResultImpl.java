@@ -12,6 +12,12 @@ public class DataResultImpl implements DataResult {
 	private ApiServiceFactory apiServiceFactory = new ApiServiceFactory();
 
 	@Override
+	public void getMainInfo(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getMainInfo(params);
+		call.enqueue(callback);
+	}
+
+	@Override
 	public void getCardUsage(Callback<JsonObject> callback, Map<String, String> params) {
 		Call<JsonObject> call = apiServiceFactory.makeApiService().getCardUsage(params);
 		call.enqueue(callback);

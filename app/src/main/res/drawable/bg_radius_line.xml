@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<!--	<solid android:color="@color/colorTextBlue"/>-->
+	<gradient
+		android:angle="45"
+		android:endColor="@color/colorSigBlue"
+		android:centerColor="@color/colorCircleGrad"
+		android:startColor="@color/colorTextBlue"
+		android:useLevel="false" />
+<!--	<stroke android:width="3dp" android:color="@color/colorTextBlue" />-->
+	<corners android:radius="8dp"/>
+	<padding android:left="0dp" android:top="2dp" android:right="0dp" android:bottom="2dp" />
+</shape>

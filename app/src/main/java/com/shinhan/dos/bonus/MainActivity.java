@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -55,6 +56,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private LinearLayout ll_list_irp;
 	private LinearLayout ll_list_house;
 	private LinearLayout ll_list_fund;
+	private View progress_default;
+
+	private String mCustomerName = "";
+	private int mSalary = 0;
+	private int mCreditAmount = 0;// 신용카드사용금액
+	private int mCheckAmount = 0;// 체크카드사용금액
+	private int cultureTotalAmount = 0; // 전통시장
+	private int publicTransferTotalAmount = 0; // 버스
+	private int deductInsuranceTotalAmount = 0; // 보장성 보험 납입금액
+	private int fundTotalAmount = 0; // 펀드
+	private int investTotalAmount = 0; // 주식
+	private float yumTotalAmount = 0; // 연금저축
+	private int irpTotalAmount = 0; // IRP
+	private int chungyakTotalAmount = 0; // 청약
+
+	private JsonObject mResultData;
+
+	private int progressWidth = 0;
 
 	private ImageView iv_input_my;
 
@@ -63,12 +82,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initView();
-		setPercent(80);
 
 		SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
 		SharedPreferences.Editor editor = pref.edit();
 		editor.putBoolean("initUser", false);
 		editor.commit();
+
+		setCirclePercent(80);
 	}
 
 	private void initView() {
@@ -91,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		ll_list_irp = findViewById(R.id.ll_list_irp);
 		ll_list_house = findViewById(R.id.ll_list_house);
 		ll_list_fund = findViewById(R.id.ll_list_fund);
+		progress_default = (View) findViewById(R.id.progress_default);
 
 		iv_input_my = findViewById(R.id.iv_input_my_money);
 
@@ -118,11 +139,349 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				mBottomSheetBehavior.setPeekHeight((int) (height - (inner.getHeight() + inner2.getHeight() + height * 0.13)));
 			}
 		});
+
+		progress_default.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				progress_default.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				progressWidth = progress_default.getWidth();
+
+				requestAllInfo();
+			}
+		});
+
 	}
 
-	private void setPercent(int percent) {
+	private void requestAllInfo() {
+		DataResult dataResult = new DataResultImpl();
+		Map params = new LinkedHashMap<>();
+		params.put("hpno", "01071444074"); // TODO Shared Preference에서 get
+		dataResult.getMainInfo(new Callback<JsonObject>() {
+			@Override
+			public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+				Log.d(TAG, response.body().toString());
+
+				mResultData = response.body().getAsJsonObject().get("dataBody").getAsJsonObject();
+				if (mResultData != null) {
+					setCardAndMoneyResult();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<JsonObject> call, Throwable t) {
+				Log.d(TAG, "FAIL..");
+			}
+		}, params);
+	}
+
+	private void setCirclePercent(int percent) {
 		mProgressBar.setProgress(percent);
 		mTvPercent.setText(percent + "");
+	}
+
+	/**
+	 * 카드 & 현금 공제
+	 */
+	private void setCardAndMoneyResult() {
+		mSalary = 80000000; // TODO : REAL DATA
+		setUserMoneyInfo();
+
+		drawFirstMoneyView();
+		drawSecondMoneyView();
+		drawThirdMoneyView();
+		drawStockView();
+		drawBusView();
+		drawInsuranceView();
+		drawMarketView();
+		drawIrpView();
+		drawHouseView();
+		drawFundView();
+	}
+
+	private void setUserMoneyInfo() {
+		mCustomerName = mResultData.get("customerName").getAsString();
+		String phoneNumber = mResultData.get("phoneNumber").getAsString();
+		mCheckAmount = Integer.parseInt(mResultData.get("checkCardTotalAmount").getAsString());
+		mCreditAmount = Integer.parseInt(mResultData.get("creditCardTotalAmount").getAsString()) + Integer.parseInt(mResultData.get("cashTotalAmount").getAsString());
+
+		cultureTotalAmount = Integer.parseInt(mResultData.get("cultureTotalAmount").getAsString());
+		publicTransferTotalAmount = Integer.parseInt(mResultData.get("publicTransferTotalAmount").getAsString());
+		deductInsuranceTotalAmount = Integer.parseInt(mResultData.get("deductInsuranceTotalAmount").getAsString());
+		fundTotalAmount = Integer.parseInt(mResultData.get("fundTotalAmount").getAsString());
+		investTotalAmount = Integer.parseInt(mResultData.get("investTotalAmount").getAsString());
+		yumTotalAmount = Float.parseFloat(mResultData.get("yumTotalAmount").getAsString());
+		irpTotalAmount = Integer.parseInt(mResultData.get("IRPTotalAmount").getAsString());
+		chungyakTotalAmount = Integer.parseInt(mResultData.get("chungyakTotalAmount").getAsString());
+	}
+
+	private void drawFirstMoneyView() {
+		float maxMoney = 0;
+		int dataMoney = 0;
+
+		if (mSalary >= 15000000) {
+			maxMoney = (float) (mSalary * 0.25);
+		} else {
+			maxMoney = (float) (mSalary * 0.2);
+		}
+
+		dataMoney = mCreditAmount + mCheckAmount;
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt1)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_card1)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_card1)).requestLayout();
+			((TextView) findViewById(R.id.tv_yes_credit_card)).setVisibility(View.VISIBLE);
+			((TextView) findViewById(R.id.tv_no_credit_card)).setVisibility(View.GONE);
+		} else {
+			((TextView) findViewById(R.id.tv_yes_credit_card)).setVisibility(View.GONE);
+			((TextView) findViewById(R.id.tv_no_credit_card)).setVisibility(View.VISIBLE);
+		}
+		((TextView) findViewById(R.id.tv_max1)).setText(" / " + moneyToManwon(maxMoney));
+
+	}
+
+	private void drawSecondMoneyView() {
+		int maxMoney = 0;
+		int dataMoney = 0;
+		float checkMoney = 0;
+
+		maxMoney = mSalary;
+
+		if (mSalary >= 15000000) {
+			checkMoney = (float) (mSalary * 0.25);
+		} else {
+			checkMoney = (float) (mSalary * 0.2);
+		}
+
+		float percentCheck = (float) checkMoney / maxMoney;
+		if (percentCheck < 1.0) {
+			((View) findViewById(R.id.progress_card2_dis)).getLayoutParams().width = (int) (progressWidth * percentCheck);
+		}
+
+//		dataMoney = 신용카드사용금액 + 체크카드사용금액 + 현금이용금액(서버)
+		dataMoney = mCreditAmount + mCheckAmount;
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt2)).setText(moneyToManwon(dataMoney) + "");
+
+		if (percent < 1.0) {
+			((View) findViewById(R.id.progress_card2)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_card2)).requestLayout();
+		}
+
+		if (checkMoney > dataMoney) {
+			((TextView) findViewById(R.id.tv_can)).setVisibility(View.GONE);
+			((TextView) findViewById(R.id.tv_cant)).setText(moneyToManwon(maxMoney - dataMoney) + ((TextView) findViewById(R.id.tv_cant)).getText().toString());
+			((TextView) findViewById(R.id.tv_cant)).setVisibility(View.VISIBLE);
+			((LinearLayout) findViewById(R.id.ll_third2)).setVisibility(View.GONE);
+			((LinearLayout) findViewById(R.id.ll_third1)).setVisibility(View.GONE);
+		} else {
+			((TextView) findViewById(R.id.tv_cant)).setVisibility(View.GONE);
+			((TextView) findViewById(R.id.tv_can)).setVisibility(View.VISIBLE);
+			((LinearLayout) findViewById(R.id.ll_third2)).setVisibility(View.VISIBLE);
+			((LinearLayout) findViewById(R.id.ll_third1)).setVisibility(View.VISIBLE);
+		}
+		((TextView) findViewById(R.id.tv_max2)).setText(" / " + moneyToManwon(maxMoney) + "");
+	}
+
+	private void drawThirdMoneyView() {
+		int maxMoney = 0;
+		float dataMoney1 = 0;
+		float dataMoney2 = 0;
+
+		if (mSalary <= 70000000) {
+			maxMoney = 3000000;
+		} else if (mSalary > 7000 && mSalary <= 12000) {
+			maxMoney = 2500000;
+		} else {
+			maxMoney = 2000000;
+		}
+
+//		dataMoney1 = 신용카드사용금액 * 0.15
+		dataMoney1 = (float) (mCreditAmount * 0.15);
+//		dataMoney2 = 체크카드 및 현금 사용금액 * 0.30
+		dataMoney2 = (float) (mCheckAmount * 0.30);
+
+		float percent1 = (float) dataMoney1 / maxMoney;
+		float percent2 = (float) dataMoney2 / maxMoney;
+
+		((View) findViewById(R.id.progress_card4)).getLayoutParams().width = (int) (progressWidth * percent1);
+		((View) findViewById(R.id.progress_card4)).requestLayout();
+
+		if ((percent1 + percent2) <= 1.0) {
+			((View) findViewById(R.id.progress_card3)).getLayoutParams().width = (int) (progressWidth * (percent1 + percent2));
+			((View) findViewById(R.id.progress_card3)).requestLayout();
+			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(dataMoney1 + dataMoney2) + "");
+//			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(dataMoney1) + ", " + moneyToManwon(dataMoney2));
+		} else {
+			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(maxMoney) + "");
+		}
+		((TextView) findViewById(R.id.tv_max3)).setText(" / " + moneyToManwon(maxMoney) + "");
+	}
+
+	private void drawStockView() {
+		float maxMoney = 0;
+		float rate = 0;
+		float dataMoney = investTotalAmount;
+
+		if (dataMoney <= 30000000) {
+			rate = 1;
+			maxMoney = dataMoney * rate;
+		} else if (dataMoney > 30000000 && dataMoney <= 50000000) {
+			rate = (float) 0.7;
+			maxMoney = dataMoney * rate;
+		} else {
+			rate = (float) 0.3;
+			maxMoney = dataMoney * rate;
+		}
+		dataMoney = dataMoney * rate;
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt_stock)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_stock)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_stock)).requestLayout();
+		} else {
+			((TextView) findViewById(R.id.tv_amt_stock)).setText(moneyToManwon(maxMoney) + "");
+		}
+
+		((TextView) findViewById(R.id.tv_max_stock)).setText(" / " + moneyToManwon(maxMoney));
+	}
+
+	private void drawInsuranceView() {
+		float maxMoney = (float) (1000000 * 0.132);
+		float dataMoney = (float) (deductInsuranceTotalAmount * 0.132);
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt_insurance)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_insurance)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_insurance)).requestLayout();
+		} else {
+			((TextView) findViewById(R.id.tv_amt_insurance)).setText(moneyToManwon(maxMoney) + "");
+		}
+
+		((TextView) findViewById(R.id.tv_max_insurance)).setText(" / " + moneyToManwon(maxMoney));
+	}
+
+	private void drawBusView() {
+		float maxMoney = (float) (1000000 * 0.4);
+		float dataMoney = (float) (publicTransferTotalAmount * 0.4);
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt_bus)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_bus)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_bus)).requestLayout();
+		} else {
+			((TextView) findViewById(R.id.tv_amt_bus)).setText(moneyToManwon(maxMoney) + "");
+		}
+
+		((TextView) findViewById(R.id.tv_max_bus)).setText(" / " + moneyToManwon(maxMoney));
+	}
+
+	private void drawMarketView() {
+		float maxMoney = (float) (1000000 * 0.4);
+		float dataMoney = (float) (cultureTotalAmount * 0.4);
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt_market)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_market)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_market)).requestLayout();
+		} else {
+			((TextView) findViewById(R.id.tv_amt_market)).setText(moneyToManwon(maxMoney) + "");
+		}
+
+		((TextView) findViewById(R.id.tv_max_market)).setText(" / " + moneyToManwon(maxMoney));
+	}
+
+	private void drawIrpView() {
+		float maxMoney = 0;
+		float dataMoney = 0;
+		float dataMoneyIrp = irpTotalAmount;
+		float dataMoneyYum = yumTotalAmount;
+		float rate = 0;
+		// 연금
+		dataMoney = yumTotalAmount;
+		if (dataMoney <= 55000000) {
+			rate = (float) 0.165;
+			maxMoney = (float) (4000000 * rate);
+		} else if (dataMoney > 55000000 && dataMoney <= 120000000) {
+			rate = (float) 0.132;
+			maxMoney = (float) (3000000 * rate);
+		} else {
+			rate = (float) 0.132;
+			maxMoney = (float) (3000000 * rate);
+		}
+
+		// IRP
+		if (irpTotalAmount > yumTotalAmount) {
+			dataMoney = irpTotalAmount;
+			if (dataMoney <= 55000000) {
+				rate = (float) 0.165;
+				maxMoney = (float) (7000000 * rate);
+			} else if (dataMoney > 55000000 && dataMoney <= 120000000) {
+				rate = (float) 0.132;
+				maxMoney = (float) (7000000 * rate);
+			} else {
+				rate = (float) 0.132;
+				maxMoney = (float) (7000000 * rate);
+			}
+		}
+		dataMoney = dataMoney * rate;
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt_irp)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_irp)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_irp)).requestLayout();
+		} else {
+			((TextView) findViewById(R.id.tv_amt_irp)).setText(moneyToManwon(maxMoney) + "");
+		}
+
+		((TextView) findViewById(R.id.tv_max_irp)).setText(" / " + moneyToManwon(maxMoney));
+	}
+
+	private void drawHouseView() {
+		float maxMoney = (float) (2400000 * 0.4);
+		float dataMoney = (float) (chungyakTotalAmount * 0.4);
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt_house)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_house)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_house)).requestLayout();
+		} else {
+			((TextView) findViewById(R.id.tv_amt_house)).setText(moneyToManwon(maxMoney) + "");
+		}
+
+		((TextView) findViewById(R.id.tv_max_house)).setText(" / " + moneyToManwon(maxMoney));
+	}
+
+	private void drawFundView() {
+		float maxMoney = (float) (3000000 * 0.1);
+		float dataMoney = (float) (fundTotalAmount * 0.1);
+
+		float percent = (float) dataMoney / maxMoney;
+		((TextView) findViewById(R.id.tv_amt_fund)).setText(moneyToManwon(dataMoney) + "");
+		if (percent < 1.0) {
+			// 공제 전
+			((View) findViewById(R.id.progress_fund)).getLayoutParams().width = (int) (progressWidth * percent);
+			((View) findViewById(R.id.progress_fund)).requestLayout();
+		} else {
+			((TextView) findViewById(R.id.tv_amt_fund)).setText(moneyToManwon(maxMoney) + "");
+		}
+
+		((TextView) findViewById(R.id.tv_max_fund)).setText(" / " + moneyToManwon(maxMoney));
 	}
 
 	private int getScreenSize() {
@@ -141,6 +500,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			result = getResources().getDimensionPixelSize(resourceId);
 		}
 		return result;
+	}
+
+	/**
+	 * 10000 -> 1(만원) 으로 바꿈
+	 *
+	 * @param money
+	 * @return
+	 */
+	private int moneyToManwon(float money) {
+		float moneyManwon = (float) money / 10000;
+		int moneyManwonInt = (int) Math.round(moneyManwon);
+
+		return moneyManwonInt;
 	}
 
 	@Override

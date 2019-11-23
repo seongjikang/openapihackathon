@@ -9,22 +9,23 @@
 	tools:context=".MainActivity">
 
 	<LinearLayout
-		android:weightSum="10"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical">
+		android:orientation="vertical"
+		android:weightSum="10">
 
 		<View
-			android:layout_weight="1.3"
 			android:layout_width="match_parent"
-			android:layout_height="0dp"/>
+			android:layout_height="0dp"
+			android:layout_weight="1.3" />
+
 		<LinearLayout
 			android:id="@+id/ll_top_total"
-			android:onClick="onClick"
 			style="@style/ElevationLinearLayoutStyle"
 			android:layout_marginLeft="16dp"
 			android:layout_marginRight="16dp"
 			android:background="@drawable/background_ll_white_shadow"
+			android:onClick="onClick"
 			android:orientation="vertical"
 			android:paddingBottom="34dp">
 
@@ -102,10 +103,10 @@
 					android:src="@drawable/icon_main_gps" />
 
 				<TextView
-					android:textAlignment="center"
 					style="@style/PlainTextViewStyle"
 					android:layout_marginTop="08dp"
 					android:text="주변에서 공제받기"
+					android:textAlignment="center"
 					android:textSize="10sp" />
 			</LinearLayout>
 
@@ -127,10 +128,10 @@
 					android:src="@drawable/icon_main_stock" />
 
 				<TextView
-					android:textAlignment="center"
 					style="@style/PlainTextViewStyle"
 					android:layout_marginTop="08dp"
 					android:text="주식 공제대상 조회"
+					android:textAlignment="center"
 					android:textSize="10sp" />
 			</LinearLayout>
 
@@ -152,10 +153,10 @@
 					android:src="@drawable/icon_main_insurance" />
 
 				<TextView
-					android:textAlignment="center"
 					style="@style/PlainTextViewStyle"
 					android:layout_marginTop="08dp"
 					android:text="보장성보험 확인"
+					android:textAlignment="center"
 					android:textSize="10sp" />
 			</LinearLayout>
 		</LinearLayout>
@@ -244,6 +245,7 @@
 							android:orientation="vertical">
 
 							<TextView
+								android:id="@+id/tv_total_deduction"
 								style="@style/PlainTextViewStyle"
 								android:text="3,000원"
 								android:textSize="25sp" />
@@ -269,6 +271,7 @@
 							android:orientation="vertical">
 
 							<TextView
+								android:id="@+id/tv_available_deduction_amt"
 								style="@style/PlainTextViewStyle"
 								android:text="3,000,000원"
 								android:textSize="25sp" />
@@ -307,22 +310,37 @@
 						android:layout_height="wrap_content"
 						android:gravity="bottom">
 
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:src="@drawable/icon_list_card" />
+
+						<TextView
+							style="@style/PlainTextViewStyle"
+							android:layout_marginLeft="08dp"
+							android:text="카드, 현금 공제"
+							android:textSize="15sp" />
+					</LinearLayout>
+
+					<!--찻번째-->
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="12dp"
+						android:gravity="bottom">
+
 						<LinearLayout
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
 							android:gravity="bottom">
 
-							<ImageView
-								android:layout_width="40dp"
-								android:layout_height="40dp"
-								android:src="@drawable/icon_list_card" />
-
 							<TextView
 								style="@style/PlainTextViewStyle"
 								android:layout_marginLeft="04dp"
-								android:text="카드 공제"
-								android:textSize="15sp" />
+								android:text="카드, 현금 사용금액 / 공제 시작금액"
+								android:textSize="12sp"
+								android:textStyle="bold" />
 						</LinearLayout>
 
 						<LinearLayout
@@ -331,11 +349,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt1"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max1"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -353,57 +373,221 @@
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="10dp"
 						android:orientation="vertical">
-						<!--공제시작점-->
+
+						<!--체크or신용/공제시작점-->
 						<FrameLayout
 							android:layout_width="match_parent"
-							android:layout_height="wrap_content">
+							android:layout_height="wrap_content"
+							android:layout_marginTop="04dp">
 
-							<ImageView
+							<View
+								android:id="@+id/progress_default"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
 								android:id="@+id/progress_card1"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
+						<!--일정선 도달전-->
+						<TextView
+							android:id="@+id/tv_yes_credit_card"
+							style="@style/BlueTextViewStyle"
+							android:layout_marginTop="04dp"
+							android:text="공제 도달 전! 신용카드나 체크카드를 자유롭게 사용하세요."
+							android:textSize="12sp" />
+
+						<!--도달 이후-->
+						<TextView
+							android:id="@+id/tv_no_credit_card"
+							style="@style/BlueTextViewStyle"
+							android:layout_marginTop="04dp"
+							android:text="지금부터 체크카드를 사용하시면 15% 더 혜택을 받을 수 있어요."
+							android:textSize="12sp"
+							android:visibility="gone" />
+					</LinearLayout>
+
+					<!--두번째-->
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="12dp"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="총 소비 금액 / 총 급여"
+								android:textSize="12sp"
+								android:textStyle="bold" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								android:id="@+id/tv_amt2"
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								android:id="@+id/tv_max2"
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
+
+						<!--소비금액/총급여-->
 						<FrameLayout
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="08dp">
+							android:layout_marginTop="04dp">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_card2_dis"
+								android:layout_width="match_parent"
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_light" />
+
+							<View
 								android:id="@+id/progress_card2"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_green" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
+
 						</FrameLayout>
 
+						<!--금액미도달-->
+						<TextView
+							android:id="@+id/tv_cant"
+							style="@style/BlueTextViewStyle"
+							android:layout_marginTop="04dp"
+							android:text="만원 더 쓰면 공제 시작!"
+							android:textSize="12sp" />
+
+						<!--금액도달-->
+						<TextView
+							android:id="@+id/tv_can"
+							style="@style/BlueTextViewStyle"
+							android:layout_marginTop="04dp"
+							android:text="소득공제 가능!"
+							android:textSize="12sp"
+							android:visibility="gone" />
+
+					</LinearLayout>
+
+					<!--세번째-->
+					<LinearLayout
+						android:id="@+id/ll_third1"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="12dp"
+						android:gravity="bottom">
+
+						<LinearLayout
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="bottom">
+
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="내 공제금액 / 총 공제 한도"
+								android:textSize="12sp"
+								android:textStyle="bold" />
+						</LinearLayout>
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="bottom|right">
+
+							<TextView
+								android:id="@+id/tv_amt3"
+								style="@style/PlainTextViewStyle"
+								android:text="69"
+								android:textSize="25sp" />
+
+							<TextView
+								android:id="@+id/tv_max3"
+								style="@style/PlainTextViewStyle"
+								android:text=" / 300"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+
+							<TextView
+								style="@style/PlainTextViewStyle"
+								android:layout_marginLeft="04dp"
+								android:text="(만원)"
+								android:textColor="@color/colorTextGray"
+								android:textSize="15sp" />
+						</LinearLayout>
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/ll_third2"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
+
+						<!--공제금액/공제한도-->
 						<FrameLayout
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="08dp">
+							android:layout_marginTop="04dp">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
 								android:id="@+id/progress_card3"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_green" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_green" />
+
+							<View
+								android:id="@+id/progress_card4"
+								android:layout_width="match_parent"
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
+
 						</FrameLayout>
 					</LinearLayout>
 				</LinearLayout>
@@ -438,7 +622,7 @@
 
 							<TextView
 								style="@style/PlainTextViewStyle"
-								android:layout_marginLeft="04dp"
+								android:layout_marginLeft="08dp"
 								android:text="주식 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
@@ -449,11 +633,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt_stock"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max_stock"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -478,15 +664,16 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_stock"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
 					</LinearLayout>
@@ -522,7 +709,7 @@
 
 							<TextView
 								style="@style/PlainTextViewStyle"
-								android:layout_marginLeft="04dp"
+								android:layout_marginLeft="08dp"
 								android:text="보험 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
@@ -533,11 +720,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt_insurance"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max_insurance"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -562,15 +751,16 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_insurance"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
 					</LinearLayout>
@@ -606,7 +796,7 @@
 
 							<TextView
 								style="@style/PlainTextViewStyle"
-								android:layout_marginLeft="04dp"
+								android:layout_marginLeft="08dp"
 								android:text="대중교통 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
@@ -617,11 +807,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt_bus"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max_bus"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -646,15 +838,16 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_bus"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
 					</LinearLayout>
@@ -690,7 +883,7 @@
 
 							<TextView
 								style="@style/PlainTextViewStyle"
-								android:layout_marginLeft="04dp"
+								android:layout_marginLeft="08dp"
 								android:text="전통시장 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
@@ -701,11 +894,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt_market"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max_market"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -730,15 +925,16 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_market"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
 					</LinearLayout>
@@ -774,7 +970,7 @@
 
 							<TextView
 								style="@style/PlainTextViewStyle"
-								android:layout_marginLeft="04dp"
+								android:layout_marginLeft="08dp"
 								android:text="IRP 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
@@ -785,11 +981,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt_irp"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max_irp"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -814,15 +1012,16 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_irp"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
 					</LinearLayout>
@@ -858,7 +1057,7 @@
 
 							<TextView
 								style="@style/PlainTextViewStyle"
-								android:layout_marginLeft="04dp"
+								android:layout_marginLeft="08dp"
 								android:text="주택청약 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
@@ -869,11 +1068,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt_house"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max_house"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -898,15 +1099,16 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_house"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
 					</LinearLayout>
@@ -942,7 +1144,7 @@
 
 							<TextView
 								style="@style/PlainTextViewStyle"
-								android:layout_marginLeft="04dp"
+								android:layout_marginLeft="08dp"
 								android:text="펀드 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
@@ -953,11 +1155,13 @@
 							android:gravity="bottom|right">
 
 							<TextView
+								android:id="@+id/tv_amt_fund"
 								style="@style/PlainTextViewStyle"
 								android:text="69"
 								android:textSize="25sp" />
 
 							<TextView
+								android:id="@+id/tv_max_fund"
 								style="@style/PlainTextViewStyle"
 								android:text=" / 300"
 								android:textColor="@color/colorTextGray"
@@ -982,15 +1186,16 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content">
 
-							<ImageView
+							<View
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/bg_progress_bar" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line_dis" />
 
-							<ImageView
+							<View
+								android:id="@+id/progress_fund"
 								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:src="@drawable/icon_progress_blue" />
+								android:layout_height="18dp"
+								android:background="@drawable/bg_radius_line" />
 						</FrameLayout>
 
 					</LinearLayout>
