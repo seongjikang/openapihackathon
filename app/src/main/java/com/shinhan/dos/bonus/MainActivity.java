@@ -304,18 +304,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		int maxMoney = 0;
 		int dataMoney = 0;
 		float checkMoney = 0;
+		int checkMoney2 = 0;
+		float rate = 0;
 
 		maxMoney = mSalary;
 
 		if (mSalary >= 15000000) {
-			checkMoney = (float) (mSalary * 0.25);
+			rate = 0.25f;
+			checkMoney = (float) (mSalary * rate);
+			checkMoney2 = (int) (mSalary * rate);
 		} else {
-			checkMoney = (float) (mSalary * 0.2);
+			rate = 0.2f;
+			checkMoney = (float) (mSalary * rate);
+			checkMoney2 = (int) (mSalary * rate);
 		}
 
 		float percentCheck = (float) checkMoney / maxMoney;
 		if (percentCheck < 1.0) {
 			((View) findViewById(R.id.progress_card2_dis)).getLayoutParams().width = (int) (progressWidth * percentCheck);
+			((View) findViewById(R.id.progress_card2_dis)).requestLayout();
 		}
 
 //		dataMoney = 신용카드사용금액 + 체크카드사용금액 + 현금이용금액(서버)
@@ -331,7 +338,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		if (checkMoney > dataMoney) {
 			((TextView) findViewById(R.id.tv_can)).setVisibility(View.GONE);
-			((TextView) findViewById(R.id.tv_cant)).setText((int)(0.25*moneyToManwon(maxMoney - dataMoney)) + ((TextView) findViewById(R.id.tv_cant)).getText().toString());
+			Log.d("aaaa", "checkMoney2 = " + checkMoney2 + ", dataMoney = " + dataMoney);
+			Log.d("aaaa", "bbbb = " + rate * moneyToManwon(checkMoney2 - dataMoney));
+			((TextView) findViewById(R.id.tv_cant)).setText((int)(moneyToManwon(checkMoney2 - dataMoney)) + ((TextView) findViewById(R.id.tv_cant)).getText().toString());
 			((TextView) findViewById(R.id.tv_cant)).setVisibility(View.VISIBLE);
 			((LinearLayout) findViewById(R.id.ll_third2)).setVisibility(View.GONE);
 			((LinearLayout) findViewById(R.id.ll_third1)).setVisibility(View.GONE);
