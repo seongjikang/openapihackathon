@@ -88,6 +88,8 @@ public class UserInfoActivity extends AppCompatActivity {
 
 		if ("".equals(mName)) {
 			getName(mHpno);
+		} else {
+			tvName.setText(mName);
 		}
 	}
 

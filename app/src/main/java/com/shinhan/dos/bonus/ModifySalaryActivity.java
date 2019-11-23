@@ -38,6 +38,14 @@ public class ModifySalaryActivity extends AppCompatActivity {
         mName = getIntent().getStringExtra("name");
         mHpno = getIntent().getStringExtra("hpno");
 
+        if ("".equals(mName) || null == mName) {
+            mName = pref.getString("name", "");
+        }
+
+        if ("".equals(mHpno) || null == mHpno) {
+            mHpno = pref.getString("hpno", "");
+        }
+
         initView();
     }
 
