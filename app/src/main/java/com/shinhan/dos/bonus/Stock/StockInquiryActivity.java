@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -16,6 +18,8 @@ import com.shinhan.dos.bonus.QuestionActivity;
 import com.shinhan.dos.bonus.R;
 import com.shinhan.dos.bonus.data.DataResult;
 import com.shinhan.dos.bonus.data.DataResultImpl;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -36,6 +40,9 @@ public class StockInquiryActivity extends AppCompatActivity {
     ResultDataBody result;
 
     ImageView question_btn;
+    private TextView tv_name;
+
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,7 @@ public class StockInquiryActivity extends AppCompatActivity {
 
         question_btn =(ImageView)findViewById(R.id.question_img);
         question_btn.setOnClickListener(question);
-
+        tv_name = findViewById(R.id.stock_username_txt);
 
         stockRecyclerview = (RecyclerView)findViewById(R.id.recyclerview_stock);
 
@@ -53,39 +60,42 @@ public class StockInquiryActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         stockRecyclerview.setLayoutManager(linearLayoutManager);
 
-        Map params = new LinkedHashMap<>();
-        params.put("hpno", "01071444074");
-        DataResult dataResult = new DataResultImpl();
-        dataResult.getInvestUsage(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String hpno = pref.getString("hpno", "");
+        if (!"".equals(hpno) && null != hpno) {
+            Map params = new LinkedHashMap<>();
+            params.put("hpno", hpno);
+            DataResult dataResult = new DataResultImpl();
+            dataResult.getInvestUsage(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 //
-                if(response.isSuccessful()){
+                    if(response.isSuccessful()){
 
-                    Gson gson = new Gson();
-                    ResultDataBody result = gson.fromJson(response.body().get("dataBody"), ResultDataBody.class);
+                        Gson gson = new Gson();
+                        ResultDataBody result = gson.fromJson(response.body().get("dataBody"), ResultDataBody.class);
 
-                    result.getHoldingStockList();
-                    stockData.addAll(result.holdingStockList);
-                    adapter = new StockAdapter(stockData, clickEvent);
-                    stockRecyclerview.setAdapter(adapter);
+                        result.getHoldingStockList();
+                        stockData.addAll(result.holdingStockList);
+                        adapter = new StockAdapter(stockData, clickEvent);
+                        stockRecyclerview.setAdapter(adapter);
 
-                    adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
 
+                        tv_name.setText(result.getCustomerName());
+
+
+                    }
 
                 }
 
-            }
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+                    Log.d("STOCKJSON", "FAIL....");
 
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.d("STOCKJSON", "FAIL....");
-
-            }
-        }, params);
-
-
-
+                }
+            }, params);
+        }
     }
 
     public OnClickListener clickEvent = new OnClickListener() {
