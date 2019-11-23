@@ -52,8 +52,10 @@ public class StockAdapter extends RecyclerView.Adapter<StockViewHolder> {
         //holder.stock_subscribe1.setText(String.valueOf(datas.get(position).stock_subscribe2));
         if(datas.get(0).get(position).deduction==0){ // 공제 대상이 아닌경우
             holder.stock_item_box.setBackgroundResource(R.drawable.bg_stock_list_f);
-        }else{
+        }else if(datas.get(0).get(position).deduction==1){
             holder.stock_item_box.setBackgroundResource(R.drawable.bg_stock_list_t);
+        }else{
+            holder.stock_item_box.setBackgroundResource(R.drawable.fundbox);
         }
 
     }
