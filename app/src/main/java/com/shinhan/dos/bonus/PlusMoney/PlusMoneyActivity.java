@@ -11,9 +11,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.shinhan.dos.bonus.PlusMoney.Fragment.CardProductFragment;
-import com.shinhan.dos.bonus.PlusMoney.Fragment.StockProductFragment;
-import com.shinhan.dos.bonus.PlusMoney.Fragment.insuranceProductFragment;
+import com.shinhan.dos.bonus.PlusMoney.Fragment.FragCard.CardProductFragment;
+import com.shinhan.dos.bonus.PlusMoney.Fragment.FragStock.StockProductFragment;
+import com.shinhan.dos.bonus.PlusMoney.Fragment.FragInsurance.insuranceProductFragment;
 import com.shinhan.dos.bonus.R;
 
 public class PlusMoneyActivity extends AppCompatActivity {

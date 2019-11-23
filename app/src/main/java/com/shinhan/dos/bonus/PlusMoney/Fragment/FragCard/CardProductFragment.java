@@ -1,6 +1,7 @@
-package com.shinhan.dos.bonus.PlusMoney.Fragment;
+package com.shinhan.dos.bonus.PlusMoney.Fragment.FragCard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.shinhan.dos.bonus.R;
+import com.shinhan.dos.bonus.data.DataResult;
+import com.shinhan.dos.bonus.data.DataResultImpl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CardProductFragment extends Fragment {
 
@@ -39,23 +50,37 @@ public class CardProductFragment extends Fragment {
         productRecyclerview.setAdapter(adapter);
 
 
+        Map params = new LinkedHashMap<>();
+        params.put("hpno", "01071444074");
+        DataResult dataResult = new DataResultImpl();
+        dataResult.getCardList(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//
+                if(response.isSuccessful()){
 
-        /**
-         * 2. 데이터 추가 (connect server)
-         * */
+                    Gson gson = new Gson();
+                    ResultData result = gson.fromJson(response.body().get("dataBody"), ResultData.class);
 
-        productDatas.add(new ProductData(1, "DeepDream", "이거 좋은 카드다₩~~"));
-        productDatas.add(new ProductData(1, "DeepDream", "이거 좋은 카드다₩~~"));
-        productDatas.add(new ProductData(1, "강성지", "이거 좋은 카드다₩~~"));
-        productDatas.add(new ProductData(1, "최리나카드", "이거 좋은 카드다₩~~"));
-        productDatas.add(new ProductData(1, "좋은카드", "이거 좋은 카드다₩~~"));
-        productDatas.add(new ProductData(1, "DeepDream", "이거 좋은 카드다₩~~"));
+                    result.getcreditCardList();
+                    productDatas.addAll(result.creditCardList);
+                    adapter = new ProductAdapter(productDatas, clickEvent);
+                    productRecyclerview.setAdapter(adapter);
+
+                    adapter.notifyDataSetChanged();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d("STOCKJSON", "FAIL....");
+
+            }
+        }, params);
 
 
-
-        /**
-         * 3. notify
-         * */
         adapter.notifyDataSetChanged();
 
         return view;

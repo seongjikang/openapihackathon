@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="30dp"
+
             android:layout_centerHorizontal="true"
 
             >
@@ -43,41 +44,33 @@
                 android:id="@+id/txt_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
+                android:padding="5dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:padding="10dp"
 
                 >
                 <TextView
-                    android:id="@+id/product_name"
+                    android:id="@+id/intyNm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextPlain"
                     android:text="Product_name"
                     android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
                     android:layout_centerHorizontal="true"
                     android:textSize="14sp"/>
                 <TextView
-                    android:id="@+id/trdprc"
+                    android:id="@+id/inInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/colorStockDown"
-                    android:layout_below="@+id/product_name"
+                    android:layout_below="@+id/intyNm"
                     android:text="12500원"
-                    android:layout_marginBottom="10dp"
                     android:layout_centerHorizontal="true"
                     android:textSize="14sp"/>
 
-                <TextView
-                    android:id="@+id/invest_info"
-                    android:layout_width="wrap_content"
-                    android:layout_below="@+id/trdprc"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextPlain"
-                    android:text="설명이다 어쩌구 저쩌구 "
-                    android:textSize="12sp"
-                    android:layout_centerInParent="true"/>
+
             </RelativeLayout>
 
 

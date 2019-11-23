@@ -1,4 +1,4 @@
-package com.shinhan.dos.bonus.PlusMoney.Fragment;
+package com.shinhan.dos.bonus.PlusMoney.Fragment.FragCard;
 
 import android.view.View;
 import android.widget.ImageView;
