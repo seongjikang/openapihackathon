@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="170dp"
+    >
+    <RelativeLayout
+        android:id="@+id/insurance_item_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_insurance_list_t"
+        android:padding="45dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/insurance_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            >
+            <TextView
+                android:id="@+id/insurance_name_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보험이름"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+
+            >
+            <TextView
+                android:id="@+id/insurance_type_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/colorTextPlain"
+                android:text="셜명입니다 어쩌구 저쩌구 얼씨구 절씨구"/>
+            <TextView
+                android:id="@+id/total_txt"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/insurance_type_txt"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorStockDown"
+                android:text="합계보험료"/>
+            <TextView
+                android:id="@+id/total_insurance_amount"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/insurance_type_txt"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/total_txt"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorStockDown"
+                android:text="230,000"/>
+            <TextView
+                android:id="@+id/stock_currentvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/insurance_type_txt"
+                android:layout_toLeftOf="@+id/minus_tax_amount"
+                android:textColor="@color/colorStockDown"
+                android:text="세액공제 총액"/>
+
+            <TextView
+                android:id="@+id/minus_tax_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/insurance_type_txt"
+                android:textColor="@color/colorStockDown"
+                android:text="12,000"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
