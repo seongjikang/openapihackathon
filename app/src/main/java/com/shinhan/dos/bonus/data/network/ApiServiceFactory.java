@@ -4,9 +4,23 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiServiceFactory {
+	public static final String URL = "http://10.3.17.188:3338";
+	public static final String URL_MJ = "http://10.3.17.188:3339"; // 임시 -> 통합예정
+
 	public ApiService makeApiService() {
 		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl(ApiService.URL)
+				.baseUrl(URL)
+				.addConverterFactory(GsonConverterFactory.create())
+				.build();
+
+		ApiService apiService = retrofit.create(ApiService.class);
+		return apiService;
+	}
+
+	// 임시 -> 통합예정
+	public ApiService makeApiServiceMJ() {
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl(URL_MJ)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
 
