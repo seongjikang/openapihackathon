@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="0dp"
+    style="@style/ElevationLinearLayoutStyle"
+    android:layout_margin="4dp"
+    android:background="@drawable/background_ll_white_shadow"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="14dp"
+    android:layout_marginLeft="19dp"
+    android:layout_marginBottom="14dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/PlainTextViewStyle"
+            android:textSize="15dp"
+            android:text="종로 3가 ATM"/>
+        <TextView
+            android:id="@+id/distance"
+            style="@style/PlainTextViewStyle"
+            android:textColor="@color/colorTextBlue"
+            android:textSize="15dp"
+            android:text="약 743M"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        >
+        <ImageView
+            android:id="@+id/marker"
+            android:src="@drawable/icon_marker_blue"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>
