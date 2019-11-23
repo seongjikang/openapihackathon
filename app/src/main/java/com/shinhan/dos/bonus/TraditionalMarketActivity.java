@@ -43,6 +43,7 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
     private RecyclerView mRecyclerViewTm;
     private TraditionalMarketAdapter mTMAdapter;
     private TextView mMoney;
+    private TextView mAdditionalMoney;
 
     private ArrayList<TraditionalMarketData> mResultList = new ArrayList<>();
 
@@ -69,6 +70,8 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
         mTMAdapter = new TraditionalMarketAdapter(mResultList);
         mRecyclerViewTm.setAdapter(mTMAdapter);
         mMoney = findViewById(R.id.money);
+        mAdditionalMoney = findViewById(R.id.additional_money);
+        mAdditionalMoney.setText(getIntent().getIntExtra("tra_market",-1)+"");
     }
 
     @Override
@@ -191,13 +194,15 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d(TAG, response.body().get("dataBody").getAsJsonObject().get("traditionalList").getAsJsonArray().get(0).toString());
-                JsonArray jsonArray = response.body().get("dataBody").getAsJsonObject().get("traditionalList").getAsJsonArray();
-                int sum =0;
+
+                //JsonArray jsonArray = response.body().get("dataBody").getAsJsonObject().get("traditionalList").getAsJsonArray();
+                int sum =Integer.parseInt(response.body().get("dataBody").getAsJsonObject().get("totalamount").getAsString().replace("\"",""));
+                /*
                 for(int i=0; i<jsonArray.size(); i++) {
                     JsonObject jsonObject = (JsonObject)jsonArray.get(i);
-                    sum+=Integer.parseInt(jsonObject.get("amount").getAsString().replace("\"",""));
+                    sum+=Integer.parseInt(jsonObject.get("totalamount").getAsString().replace("\"",""));
                     setGoogleMapMarker();
-                }
+                }*/
                 Log.d(TAG, "sum = "+sum);
                 mMoney.setText((2500000-sum)+"원");
             }

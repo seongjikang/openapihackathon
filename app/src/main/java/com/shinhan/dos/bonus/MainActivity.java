@@ -62,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private float mTotalMyDeduction = 0; // 공제총액
 	private float mTotalMyDeductionLimits = 0; // 공제가능금액
 
+	private int mTotalCard = 0;
+	private int mTotalCardLimit = 0;
+
+	private int mTotalMarket = 0;
+
 	private String mCustomerName = "";
 	private int mSalary = 0;
 	private String mHpno = "";
@@ -344,6 +349,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			((View) findViewById(R.id.progress_card3)).requestLayout();
 			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(dataMoney1 + dataMoney2) + "");
 //			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(dataMoney1) + ", " + moneyToManwon(dataMoney2));
+			mTotalCard = moneyToManwon(dataMoney1 + dataMoney2);
 			mTotalMyDeduction += moneyToManwon(dataMoney1 + dataMoney2);
 		} else {
 			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(maxMoney) + "");
@@ -351,6 +357,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 		((TextView) findViewById(R.id.tv_max3)).setText(" / " + moneyToManwon(maxMoney) + "");
 
+		mTotalCardLimit = moneyToManwon(maxMoney);
 		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
 /*
@@ -390,7 +397,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 */
 
 	private void drawInsuranceView() {
-		float maxMoney = (float) (1000000 * 0.132);
+		float maxMoney = (float) (1000000);
+		Log.i("deduct","deduct = " + deductInsuranceTotalAmount);
 		float dataMoney = (float) (deductInsuranceTotalAmount * 0.132);
 
 		float percent = (float) dataMoney / maxMoney;
@@ -410,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	private void drawBusView() {
-		float maxMoney = (float) (1000000 * 0.4);
+		float maxMoney = (float) (1000000);
 		float dataMoney = (float) (publicTransferTotalAmount * 0.4);
 
 		float percent = (float) dataMoney / maxMoney;
@@ -430,7 +438,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	private void drawMarketView() {
-		float maxMoney = (float) (1000000 * 0.4);
+		float maxMoney = (float) (1000000);
 		float dataMoney = (float) (cultureTotalAmount * 0.4);
 
 		float percent = (float) dataMoney / maxMoney;
@@ -442,6 +450,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_market)).setText(moneyToManwon(maxMoney) + "");
+			//mTotalMarket = moneyToManwon(dataMoney);
 			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
@@ -592,6 +601,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			case R.id.ll_middle_gps:
 				// TODO
 				intent = new Intent(MainActivity.this, TraditionalMarketActivity.class);
+				Log.i("mTotalMarket",moneyToManwon((float)( cultureTotalAmount*0.4))+"");
+				intent.putExtra("tra_market",100-moneyToManwon((float)( cultureTotalAmount*0.4)));
 				startActivity(intent);
 				break;
 			case R.id.ll_middle_stock:
@@ -604,6 +615,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				break;
 			case R.id.ll_list_card:
 				intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
+				intent.putExtra("plus_card_money",mTotalCardLimit-mTotalCard);
 				startActivity(intent);
 				break;
 			/*case R.id.ll_list_stock:
@@ -612,6 +624,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				break;*/
 			case R.id.ll_list_insurance:
 				intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
+				Log.i("insuranceMo",moneyToManwon((float)( deductInsuranceTotalAmount*0.132))+"");
+				intent.putExtra("plus_life_money", 100 - moneyToManwon((float)( deductInsuranceTotalAmount*0.4)));
 				startActivity(intent);
 				break;
 			case R.id.ll_list_bus:
