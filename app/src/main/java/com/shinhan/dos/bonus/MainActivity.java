@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private LinearLayout ll_list_house;
 	private LinearLayout ll_list_fund;
 
+	private ImageView iv_input_my;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		ll_list_house = findViewById(R.id.ll_list_house);
 		ll_list_fund = findViewById(R.id.ll_list_fund);
 
+		iv_input_my = findViewById(R.id.iv_input_my_money);
+
 		mLlTopTotal.setOnClickListener(this);
 		mLlMiddleGps.setOnClickListener(this);
 		mLlMiddleStock.setOnClickListener(this);
@@ -95,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		ll_list_irp.setOnClickListener(this);
 		ll_list_house.setOnClickListener(this);
 		ll_list_fund.setOnClickListener(this);
+		iv_input_my.setOnClickListener(this);
 
 		final LinearLayout inner = findViewById(R.id.ll_middle_buttons);
 		final LinearLayout inner2 = findViewById(R.id.ll_top_total);
@@ -190,6 +196,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				// TODO
 				/*intent = new Intent(MainActivity.this, InsuranceInquiryActivity.class);
 				startActivity(intent);*/
+				break;
+			case R.id.iv_input_my_money:
+				startActivity(new Intent(this, UserInfoActivity.class));
 				break;
 		}
 	}
