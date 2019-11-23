@@ -21,6 +21,7 @@
 	<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
+		<item name="android:windowBackground">@color/colorWhite</item>
 		<item name="editTextStyle">@style/CustomEditText</item>
 		<item name="android:textViewStyle">@style/CustomTextView</item>
 		<item name="buttonStyle">@style/CustomButton</item>
