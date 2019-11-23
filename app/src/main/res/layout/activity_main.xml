@@ -20,6 +20,7 @@
 			android:layout_height="0dp"/>
 		<LinearLayout
 			android:id="@+id/ll_top_total"
+			android:onClick="onClick"
 			style="@style/ElevationLinearLayoutStyle"
 			android:layout_marginLeft="16dp"
 			android:layout_marginRight="16dp"
@@ -83,6 +84,7 @@
 			android:background="@android:color/transparent">
 
 			<LinearLayout
+				android:id="@+id/ll_middle_gps"
 				style="@style/ElevationLinearLayoutStyle"
 				android:layout_width="0dp"
 				android:layout_marginLeft="16dp"
@@ -99,6 +101,7 @@
 					android:src="@drawable/icon_main_gps" />
 
 				<TextView
+					android:textAlignment="center"
 					style="@style/PlainTextViewStyle"
 					android:layout_marginTop="08dp"
 					android:text="주변에서 공제받기"
@@ -106,6 +109,7 @@
 			</LinearLayout>
 
 			<LinearLayout
+				android:id="@+id/ll_middle_stock"
 				style="@style/ElevationLinearLayoutStyle"
 				android:layout_width="0dp"
 				android:layout_marginLeft="04dp"
@@ -122,6 +126,7 @@
 					android:src="@drawable/icon_main_stock" />
 
 				<TextView
+					android:textAlignment="center"
 					style="@style/PlainTextViewStyle"
 					android:layout_marginTop="08dp"
 					android:text="주식 공제대상 조회"
@@ -129,6 +134,7 @@
 			</LinearLayout>
 
 			<LinearLayout
+				android:id="@+id/ll_middle_insurance"
 				style="@style/ElevationLinearLayoutStyle"
 				android:layout_width="0dp"
 				android:layout_marginLeft="04dp"
@@ -145,6 +151,7 @@
 					android:src="@drawable/icon_main_insurance" />
 
 				<TextView
+					android:textAlignment="center"
 					style="@style/PlainTextViewStyle"
 					android:layout_marginTop="08dp"
 					android:text="보장성보험 확인"
@@ -285,6 +292,7 @@
 
 				<!--카드공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_card"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
@@ -383,6 +391,7 @@
 
 				<!--주식공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_stock"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
@@ -466,6 +475,7 @@
 
 				<!--보험공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_insurance"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
@@ -549,6 +559,7 @@
 
 				<!--대중교통공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_bus"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
@@ -632,6 +643,7 @@
 
 				<!--전통시장공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_market"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
@@ -715,6 +727,7 @@
 
 				<!--irp/연금저축 공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_irp"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
@@ -798,6 +811,7 @@
 
 				<!--주택청약공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_house"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
@@ -881,6 +895,7 @@
 
 				<!--펀드공제-->
 				<LinearLayout
+					android:id="@+id/ll_list_fund"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
 					android:layout_marginTop="08dp"
