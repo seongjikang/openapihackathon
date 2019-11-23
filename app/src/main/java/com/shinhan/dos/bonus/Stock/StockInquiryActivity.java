@@ -5,18 +5,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.shinhan.dos.bonus.R;
+import com.shinhan.dos.bonus.data.DataResult;
+import com.shinhan.dos.bonus.data.DataResultImpl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class StockInquiryActivity extends AppCompatActivity {
 
     private RecyclerView stockRecyclerview;
     private StockAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<StockData> stockData = new ArrayList<>();
+    private ArrayList<ArrayList<StockData>> stockData = new ArrayList<>();
+    ResultDataBody result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +42,38 @@ public class StockInquiryActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         stockRecyclerview.setLayoutManager(linearLayoutManager);
 
+        Map params = new LinkedHashMap<>();
+        params.put("hpno", "01071444074");
+        DataResult dataResult = new DataResultImpl();
+        dataResult.getInvestUsage(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//
+                if(response.isSuccessful()){
 
-        stockData.add(new StockData(0, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-        stockData.add(new StockData(1, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-        stockData.add(new StockData(0, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-        stockData.add(new StockData(1, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-        stockData.add(new StockData(0, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-        stockData.add(new StockData(1, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-        stockData.add(new StockData(0, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-        stockData.add(new StockData(1, "코카콜라", 1000, "+20%", "설명이다 어쩌구 저쩌구", "설명이다 어쩌구 저쩌구 얼씨구 절씨구 "));
-//        poemdatas.add(new PoemDatas("제목", "반가워", "", "서문이", startDate));
-//        poemdatas.add(new PoemDatas("제목", "이름이뭐니", "", "서문이", startDate));
-//        poemdatas.add(new PoemDatas("제목", "잘가", "", "서문이", startDate));
+                    Gson gson = new Gson();
+                    ResultDataBody result = gson.fromJson(response.body().get("dataBody"), ResultDataBody.class);
 
-        adapter = new StockAdapter(stockData, clickEvent);
-        stockRecyclerview.setAdapter(adapter);
+                    result.getHoldingStockList();
+                    stockData.addAll(result.holdingStockList);
+                    adapter = new StockAdapter(stockData, clickEvent);
+                    stockRecyclerview.setAdapter(adapter);
 
-        adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d("STOCKJSON", "FAIL....");
+
+            }
+        }, params);
+
+
 
     }
 

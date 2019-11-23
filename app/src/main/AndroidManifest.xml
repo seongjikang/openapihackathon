@@ -22,14 +22,15 @@
 		<activity android:name=".UserInfoActivity" />
 		<activity android:name=".PlusMoney.PlusMoneyActivity" />
 		<activity android:name=".TraditionalMarketActivity"/>
+
 		<activity
 			android:name=".SplashActivity"
 			android:theme="@style/SplashTheme"
 			android:windowSoftInputMode="stateAlwaysHidden">
-<!--			<intent-filter>-->
-<!--				<action android:name="android.intent.action.MAIN" />-->
-<!--				<category android:name="android.intent.category.LAUNCHER" />-->
-<!--			</intent-filter>-->
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
 		</activity>
 		<activity
 			android:name=".MainActivity"
