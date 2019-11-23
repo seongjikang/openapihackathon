@@ -18,8 +18,26 @@ public class DataResultImpl implements DataResult {
 	}
 
 	@Override
+	public void getCardList(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getCardList(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getCash(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiServiceMJ().getCash(params);
+		call.enqueue(callback);
+	}
+
+	@Override
 	public void getInvestUsage(Callback<JsonObject> callback, Map<String, String> params) {
-		Call<JsonObject> call = apiServiceFactory.makeApiService().getInvestUsage(params);
+		Call<JsonObject> call = apiServiceFactory.makeApiServiceMJ().getInvestUsage(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void searchInvest(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiServiceMJ().searchInvest(params);
 		call.enqueue(callback);
 	}
 
@@ -31,7 +49,19 @@ public class DataResultImpl implements DataResult {
 
 	@Override
 	public void getLifeUsage(Callback<JsonObject> callback, Map<String, String> params) {
-		Call<JsonObject> call = apiServiceFactory.makeApiService().getLifeUsage(params);
+		Call<JsonObject> call = apiServiceFactory.makeApiServiceMJ().getLifeUsage(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getPublicTransfer(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiServiceMJ().getPublicTransfer(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getTraditionalMarket(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiServiceMJ().getTraditionalMarket(params);
 		call.enqueue(callback);
 	}
 

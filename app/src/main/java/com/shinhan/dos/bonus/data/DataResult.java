@@ -8,9 +8,14 @@ import retrofit2.Callback;
 
 public interface DataResult {
 	public void getCardUsage(Callback<JsonObject> callback, Map<String, String> params);
+	public void getCardList(Callback<JsonObject> callback, Map<String, String> params);
+	public void getCash(Callback<JsonObject> callback, Map<String, String> params);
 	public void getInvestUsage(Callback<JsonObject> callback, Map<String, String> params);
+	public void searchInvest(Callback<JsonObject> callback, Map<String, String> params);
 	public void getMyAccount(Callback<JsonObject> callback, Map<String, String> params);
 	public void getLifeUsage(Callback<JsonObject> callback, Map<String, String> params);
+	public void getPublicTransfer(Callback<JsonObject> callback, Map<String, String> params);
+	public void getTraditionalMarket(Callback<JsonObject> callback, Map<String, String> params);
 /*
 	// 샘플코드 ..
 	public void getUserList(Callback<JsonObject> callback);
