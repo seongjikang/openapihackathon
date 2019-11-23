@@ -63,13 +63,14 @@ public class UserInfoActivity extends AppCompatActivity {
 
 		pref = getSharedPreferences("pref", MODE_PRIVATE);
 		mHpno = pref.getString("hpno", "");
+		mName = pref.getString("name", "");
 
 		if ("".equals(mHpno)) {
 			Log.d(TAG, "hpno is null");
 			if (ActivityCompat.checkSelfPermission(this, READ_SMS) == PackageManager.PERMISSION_GRANTED &&
 					ActivityCompat.checkSelfPermission(this, READ_PHONE_NUMBERS) == PackageManager.PERMISSION_GRANTED &&
 					ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-				TelephonyManager tMgr = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+				TelephonyManager tMgr = (TelephonyManager)   this.getSystemService(Context.TELEPHONY_SERVICE);
 				String mPhoneNumber = tMgr.getLine1Number();
 				Log.d(TAG, "1 hpno = " + mPhoneNumber);
 				SharedPreferences.Editor editor = pref.edit();
@@ -82,6 +83,10 @@ public class UserInfoActivity extends AppCompatActivity {
 			}
 		} else {
 			Log.d(TAG, "hpno is not null");
+			getName(mHpno);
+		}
+
+		if ("".equals(mName)) {
 			getName(mHpno);
 		}
 	}
