@@ -2,6 +2,7 @@ package com.shinhan.dos.bonus;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -41,6 +42,7 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
     private GoogleMap mMap;
     private RecyclerView mRecyclerViewTm;
     private TraditionalMarketAdapter mTMAdapter;
+    private TextView mMoney;
 
     private ArrayList<TraditionalMarketData> mResultList = new ArrayList<>();
 
@@ -51,6 +53,7 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
 
         getATMInfo();
         getTraditionalMarketInfo();
+        getCulturePayment();
 
         //예제데이터
         //TraditionalMarketData temp1 = new TraditionalMarketData(37.570496,126.999368,"c","광장시장",1000);
@@ -65,7 +68,7 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
         mRecyclerViewTm.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         mTMAdapter = new TraditionalMarketAdapter(mResultList);
         mRecyclerViewTm.setAdapter(mTMAdapter);
-
+        mMoney = findViewById(R.id.money);
     }
 
     @Override
@@ -179,6 +182,35 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
         return (rad * 180 / Math.PI);
     }
 
+    //
+    private void getCulturePayment() {
+        Map params = new LinkedHashMap<>();
+        params.put("hpno", "01071444074");
+        DataResult dataResult = new DataResultImpl();
+        dataResult.getCulturePayment(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.d(TAG, response.body().get("dataBody").getAsJsonObject().get("traditionalList").getAsJsonArray().get(0).toString());
+                JsonArray jsonArray = response.body().get("dataBody").getAsJsonObject().get("traditionalList").getAsJsonArray();
+                int sum =0;
+                for(int i=0; i<jsonArray.size(); i++) {
+                    JsonObject jsonObject = (JsonObject)jsonArray.get(i);
+                    sum+=Integer.parseInt(jsonObject.get("amount").getAsString().replace("\"",""));
+                    setGoogleMapMarker();
+                }
+                Log.d(TAG, "sum = "+sum);
+                mMoney.setText((2500000-sum)+"원");
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d(TAG, "culturePayment FAIL....");
+
+            }
+        }, params);
+    }
+
+
     // Atm 정보 불러오기
     private void getATMInfo() {
         Map params = new LinkedHashMap<>();
@@ -215,6 +247,4 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
             }
         }, params);
     }
-
-
 }
