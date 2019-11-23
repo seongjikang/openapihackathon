@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="180dp"
+    android:layout_height="215dp"
+    >
+    <RelativeLayout
+        android:id="@+id/product_item_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_cardview"
+
+        >
+
+        <RelativeLayout
+            android:id="@+id/card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_centerHorizontal="true"
+
+            >
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_flag_blue"/>
+                <ImageView
+                    android:id="@+id/product_brand_logo"
+                    android:layout_centerInParent="true"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/shinhan_logo"/>
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/txt_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+
+                >
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPlain"
+                    android:text="Product_name"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/trdprc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorStockDown"
+                    android:layout_below="@+id/product_name"
+                    android:text="12500원"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/invest_info"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/trdprc"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPlain"
+                    android:text="설명이다 어쩌구 저쩌구 "
+                    android:textSize="12sp"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
