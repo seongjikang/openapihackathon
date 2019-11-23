@@ -7,6 +7,7 @@ import java.util.Map;
 import retrofit2.Callback;
 
 public interface DataResult {
+	public void getMainInfo(Callback<JsonObject> callback, Map<String, String> params);
 	public void getCardUsage(Callback<JsonObject> callback, Map<String, String> params);
 	public void getCardList(Callback<JsonObject> callback, Map<String, String> params);
 	public void getCash(Callback<JsonObject> callback, Map<String, String> params);

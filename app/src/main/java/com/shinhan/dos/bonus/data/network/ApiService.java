@@ -16,6 +16,12 @@ import retrofit2.http.QueryMap;
 
 public interface ApiService {
 
+	/*
+	 * 메인화면 과목별 총 금액 조회
+	 */
+	@POST("/bank/main")
+	public Call<JsonObject> getMainInfo(@Body Map<String, String> params);
+
 	/*************************
 	 * 카드
 	 *************************/
