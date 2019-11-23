@@ -77,11 +77,9 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
-
         LatLng shinhan = new LatLng(37.566585, 126.988000);
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(shinhan));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
     }
 
     public void setGoogleMapMarker() {
@@ -117,6 +115,8 @@ public class TraditionalMarketActivity extends AppCompatActivity implements OnMa
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         mMap.addMarker(markerOptions);
 
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(shinhan));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
       //  mMap.moveCamera(CameraUpdateFactory.newLatLng(shinhan));
       //  mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
     }

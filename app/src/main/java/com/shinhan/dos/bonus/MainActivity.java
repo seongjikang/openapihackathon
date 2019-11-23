@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private LinearLayout ll_list_house;
 	//	private LinearLayout ll_list_fund;
 	private View progress_default;
-
+	private ObjectAnimator progressAnimator;
 	private float mTotalMyDeduction = 0; // 공제총액
 	private float mTotalMyDeductionLimits = 0; // 공제가능금액
 
@@ -200,7 +201,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	private void setCirclePercent(int percent) {
-		mProgressBar.setProgress(percent);
+		//mProgressBar.setProgress(percent);
+		ObjectAnimator.ofInt(mProgressBar, "progress", 0, percent)
+				.setDuration(700)
+				.start();
 		mTvPercent.setText(percent + "");
 	}
 
@@ -307,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		if (checkMoney > dataMoney) {
 			((TextView) findViewById(R.id.tv_can)).setVisibility(View.GONE);
-			((TextView) findViewById(R.id.tv_cant)).setText(moneyToManwon(maxMoney - dataMoney) + ((TextView) findViewById(R.id.tv_cant)).getText().toString());
+			((TextView) findViewById(R.id.tv_cant)).setText((int)(0.25*moneyToManwon(maxMoney - dataMoney)) + ((TextView) findViewById(R.id.tv_cant)).getText().toString());
 			((TextView) findViewById(R.id.tv_cant)).setVisibility(View.VISIBLE);
 			((LinearLayout) findViewById(R.id.ll_third2)).setVisibility(View.GONE);
 			((LinearLayout) findViewById(R.id.ll_third1)).setVisibility(View.GONE);
@@ -327,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		if (mSalary <= 70000000) {
 			maxMoney = 3000000;
-		} else if (mSalary > 7000 && mSalary <= 12000) {
+		} else if (mSalary > 70000000 && mSalary <= 120000000) {
 			maxMoney = 2500000;
 		} else {
 			maxMoney = 2000000;
