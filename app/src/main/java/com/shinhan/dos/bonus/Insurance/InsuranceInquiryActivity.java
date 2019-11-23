@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -36,6 +38,9 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
     private ArrayList<InsuranceData> insuranceData = new ArrayList<>();
 
     ImageView question_btn;
+    private TextView tv_name;
+
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,41 +50,49 @@ public class InsuranceInquiryActivity extends AppCompatActivity {
 
         question_btn =(ImageView)findViewById(R.id.question_img);
         question_btn.setOnClickListener(question);
+        tv_name = findViewById(R.id.stock_username_txt);
 
         //레이아웃 매니저 설정
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         insurancekRecyclerview.setLayoutManager(linearLayoutManager);
 
-        Map params = new LinkedHashMap<>();
-        params.put("hpno", "01071444074");
-        DataResult dataResult = new DataResultImpl();
-        dataResult.getLifeUsage(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String hpno = pref.getString("hpno", "");
+        if (!"".equals(hpno) && null != hpno) {
+            Map params = new LinkedHashMap<>();
+            params.put("hpno", hpno);
+            DataResult dataResult = new DataResultImpl();
+            dataResult.getLifeUsage(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 //
-                if(response.isSuccessful()){
+                    if(response.isSuccessful()){
 
-                    Gson gson = new Gson();
-                    ResultInsuranceData result = gson.fromJson(response.body().get("dataBody"), ResultInsuranceData.class);
+                        Gson gson = new Gson();
+                        ResultInsuranceData result = gson.fromJson(response.body().get("dataBody"), ResultInsuranceData.class);
 
-                    result.getInsuranceList();
-                    insuranceData.addAll(result.insuranceList);
-                    adapter = new InsuranceAdapter(insuranceData, clickEvent);
-                    insurancekRecyclerview.setAdapter(adapter);
+                        result.getInsuranceList();
+                        insuranceData.addAll(result.insuranceList);
+                        adapter = new InsuranceAdapter(insuranceData, clickEvent);
+                        insurancekRecyclerview.setAdapter(adapter);
 
-                    adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
+
+                        tv_name.setText(result.getCustomerName());
+
+                    }
 
                 }
 
-            }
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+                    Log.d("STOCKJSON", "FAIL....");
 
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.d("STOCKJSON", "FAIL....");
+                }
+            }, params);
+        }
 
-            }
-        }, params);
 
 
 

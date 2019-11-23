@@ -16,6 +16,14 @@ public class ResultInsuranceData {
         return phoneNumber;
     }
 
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public ArrayList<InsuranceData> getInsuranceList() {
         return insuranceList;
     }

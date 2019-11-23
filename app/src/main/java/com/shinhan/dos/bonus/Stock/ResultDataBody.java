@@ -16,6 +16,14 @@ public class ResultDataBody {
         return phoneNumber;
     }
 
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public ArrayList<ArrayList<StockData>> getHoldingStockList() {
         return holdingStockList;
     }
