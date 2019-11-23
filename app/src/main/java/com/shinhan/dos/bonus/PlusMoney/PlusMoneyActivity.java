@@ -8,9 +8,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shinhan.dos.bonus.PlusMoney.Fragment.FragCard.CardProductFragment;
 import com.shinhan.dos.bonus.PlusMoney.Fragment.FragStock.StockProductFragment;
@@ -42,6 +44,10 @@ public class PlusMoneyActivity extends AppCompatActivity {
         plus_insurance_btn = (ImageView) findViewById(R.id.plus_insurance_btn);
         intent = getIntent();
 
+
+        plus_money_amount.setText(String.valueOf(intent.getExtras().getInt("plus_card_money"))); /*String형*/
+
+
         /**
          * viewpager 잘돌아가게 하기 위함
          */
@@ -62,7 +68,7 @@ public class PlusMoneyActivity extends AppCompatActivity {
                         plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                         plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
                         product_type_txt.setText("카드");
-                        //plus_money_amount.setText(intent.getExtras().getString("plus_card_money")); /*String형*/
+                        plus_money_amount.setText(String.valueOf(intent.getExtras().getInt("plus_card_money"))); /*String형*/
 
                         break;
                     case 1:
@@ -70,14 +76,14 @@ public class PlusMoneyActivity extends AppCompatActivity {
                         plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt);
                         plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
                         product_type_txt.setText("주식");
-                        //plus_money_amount.setText(intent.getExtras().getString("plus_invest_money")); /*String형*/
+                        plus_money_amount.setText("100"); /*String형*/
                         break;
                     case 2:
                         plus_card_btn.setImageResource(R.drawable.icon_card_prdt_dis);
                         plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                         plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt);
                         product_type_txt.setText("보험");
-                        //plus_money_amount.setText(intent.getExtras().getString("plus_life_money")); /*String형*/
+                        plus_money_amount.setText(String.valueOf(intent.getExtras().getInt("plus_life_money"))); /*String형*/
                         break;
 
                 }
@@ -110,12 +116,14 @@ public class PlusMoneyActivity extends AppCompatActivity {
                     plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                     plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
                     product_type_txt.setText("카드");
+                    plus_money_amount.setText(String.valueOf(intent.getExtras().getInt("plus_card_money"))); /*String형*/
                     break;
                 case 1:
                     plus_card_btn.setImageResource(R.drawable.icon_card_prdt_dis);
                     plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt);
                     plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt_dis);
                     product_type_txt.setText("주식");
+                    plus_money_amount.setText("100"); /*String형*/
 
                     break;
                 case 2:
@@ -123,7 +131,7 @@ public class PlusMoneyActivity extends AppCompatActivity {
                     plus_stock_btn.setImageResource(R.drawable.icon_stock_prdt_dis);
                     plus_insurance_btn.setImageResource(R.drawable.icon_insurance_prdt);
                     product_type_txt.setText("보험");
-
+                    plus_money_amount.setText(String.valueOf(intent.getExtras().getInt("plus_life_money"))); /*String형*/
                     break;
 
             }
