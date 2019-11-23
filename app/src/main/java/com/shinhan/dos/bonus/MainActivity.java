@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			public void onGlobalLayout() {
 				inner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 				int height = getScreenSize() - getStatusBarHeight();
-				mBottomSheetBehavior.setPeekHeight((int) (height - (inner.getHeight() + inner2.getHeight() + height*0.13)));
+				mBottomSheetBehavior.setPeekHeight((int) (height - (inner.getHeight() + inner2.getHeight() + height * 0.13)));
 			}
 		});
 	}
@@ -133,9 +133,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	@Override
 	public void onClick(View v) {
-		Toast.makeText(getApplicationContext(), v.getId() + "버튼클릭", Toast.LENGTH_SHORT).show();
 		int viewId = v.getId();
 		Intent intent = null;
+
 		switch (viewId) {
 			case R.id.ll_top_total:
 				/*intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
