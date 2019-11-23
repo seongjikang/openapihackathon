@@ -87,27 +87,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private int progressWidth = 0;
 
 	private ImageView iv_input_my;
+	private SharedPreferences pref;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+		pref = getSharedPreferences("pref", MODE_PRIVATE);
 		SharedPreferences.Editor editor = pref.edit();
 		editor.putBoolean("initUser", false);
 		editor.commit();
 
-		String salaryString = pref.getString("salary", "4000");
+		String salaryString = pref.getString("salary", "");
 		if (salaryString != null && salaryString.length() > 0) {
 			mSalary = Integer.parseInt(salaryString);
 		}
 
-		mHpno = pref.getString("hpno", "01071444074");
+		mHpno = pref.getString("hpno", "");
 		if (mHpno == null) {
 			mHpno = "01071444074";
 		}
-		mCustomerName = pref.getString("name", "최리나");
+		mCustomerName = pref.getString("name", "");
 		if (mCustomerName == null) {
 			mCustomerName = "";
 		}
@@ -175,6 +176,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				requestAllInfo();
 			}
 		});
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		String salaryString = pref.getString("salary", "");
+		if (salaryString != null && salaryString.length() > 0) {
+			mSalary = Integer.parseInt(salaryString);
+		}
+
+		mHpno = pref.getString("hpno", "");
+		if (mHpno == null) {
+			mHpno = "01071444074";
+		}
+		mCustomerName = pref.getString("name", "");
+		if (mCustomerName == null) {
+			mCustomerName = "";
+		}
 
 	}
 
@@ -663,6 +683,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			case R.id.iv_input_my_money:
 //				startActivity(new Intent(this, UserInfoActivity.class));
 				startActivity(new Intent(this, ModifySalaryActivity.class));
+				finish();
 				break;
 		}
 	}
