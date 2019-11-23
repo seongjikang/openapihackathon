@@ -89,7 +89,7 @@ public class CardProductFragment extends Fragment {
     public View.OnClickListener clickEvent = new View.OnClickListener() {
         public void onClick(View v) {
             final int itemPosition = productRecyclerview.getChildPosition(v);
-            Toast.makeText(getContext(), itemPosition + "번 리스트 클릭!!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), itemPosition + "번 리스트 클릭!!", Toast.LENGTH_SHORT).show();
 
         }
     };

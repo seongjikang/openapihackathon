@@ -31,7 +31,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder>{
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
 
-        //holder.product_img.setImageResource(R.drawable.card_img);
+        switch (position%5){
+            case 0:
+                holder.product_img.setImageResource(R.drawable.card1);
+                break;
+            case 1:
+                holder.product_img.setImageResource(R.drawable.card2);
+                break;
+            case 2:
+                holder.product_img.setImageResource(R.drawable.card3);
+                break;
+            case 3:
+                holder.product_img.setImageResource(R.drawable.card4);
+                break;
+            case 4:
+                holder.product_img.setImageResource(R.drawable.card5);
+                break;
+        }
+
         holder.product_name.setText(productData.get(position).cardName);
         if(productData.get(position).cardBonus.size()>0){
             if(productData.get(position).cardBonus.get(0).title.equals("")){
