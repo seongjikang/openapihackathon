@@ -24,20 +24,15 @@
             android:textStyle="bold"
             android:textColor="@color/colorTextPlain"/>
         <ImageView
-            android:id="@+id/stock_search_img"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:id="@+id/question_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginRight="40dp"
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@+id/stock_search_title"
-            android:src="@drawable/icon_search"/>
-        <ImageView
-            android:id="@+id/stock_question_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignBottom="@+id/stock_search_title"
-            android:layout_toLeftOf="@+id/stock_search_img"
-            android:src="@drawable/icon_question"/>
+            android:src="@drawable/icon_question"
+            />
+
         <TextView
             android:id="@+id/stock_username_txt"
             android:layout_below="@id/stock_search_title"
