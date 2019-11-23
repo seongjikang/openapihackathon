@@ -54,14 +54,32 @@ public class DataResultImpl implements DataResult {
 	}
 
 	@Override
+	public void searchInsurance(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().searchInsurance(params);
+		call.enqueue(callback);
+	}
+
+	@Override
 	public void getPublicTransfer(Callback<JsonObject> callback, Map<String, String> params) {
 		Call<JsonObject> call = apiServiceFactory.makeApiService().getPublicTransfer(params);
 		call.enqueue(callback);
 	}
 
 	@Override
-	public void getTraditionalMarket(Callback<JsonObject> callback, Map<String, String> params) {
-		Call<JsonObject> call = apiServiceFactory.makeApiService().getTraditionalMarket(params);
+	public void getCulturePayment(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getCulturePayment(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getRetailAtm(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getRetailAtm(params);
+		call.enqueue(callback);
+	}
+
+	@Override
+	public void getCultureList(Callback<JsonObject> callback, Map<String, String> params) {
+		Call<JsonObject> call = apiServiceFactory.makeApiService().getCultureList(params);
 		call.enqueue(callback);
 	}
 

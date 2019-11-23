@@ -20,34 +20,34 @@ public interface ApiService {
 	 * 카드
 	 *************************/
 	/*
-	 * 월별 카드 사용 내역 - 3338
+	 * 월별 카드 사용 내역
 	 */
 	@POST("/card/cardUsage")
 	public Call<JsonObject> getCardUsage(@Body Map<String, String> params);
 
 	/*
-	 * 카드상품조회 - 3338
+	 * 카드상품조회
 	 */
 	@POST("/card/cardList")
 	public Call<JsonObject> getCardList(@Body Map<String, String> params);
 
 	/*
-	 * 현금영수증 - 3339
+	 * 현금영수증
 	 */
-	@POST("/life/getcash")
+	@POST("/life/cash")
 	public Call<JsonObject> getCash(@Body Map<String, String> params);
 
 	/*************************
 	 * 주식
 	 *************************/
 	/*
-	 * 내 주식 - 3339
+	 * 내 주식
 	 */
 	@POST("/invest/investUsage")
 	public Call<JsonObject> getInvestUsage(@Body Map<String, String> params);
 
 	/*
-	 * 공제가능주식 - 3339
+	 * 공제가능주식
 	 */
 	@POST("/invest/searchInvest")
 	public Call<JsonObject> searchInvest(@Body Map<String, String> params);
@@ -56,7 +56,7 @@ public interface ApiService {
 	 * 은행
 	 *************************/
 	/*
-	 * 내 주택청약, 연금저축, 펀드 조회 - 3338
+	 * 내 주택청약, 연금저축, 펀드 조회
 	 */
 	@POST("/bank/myAccount")
 	public Call<JsonObject> getMyAccount(@Body Map<String, String> params);
@@ -65,31 +65,46 @@ public interface ApiService {
 	 * 보험
 	 *************************/
 	/*
-	 * 내 보험 - 3339
+	 * 내 보험
 	 */
 	@POST("/life/lifeUsage")
 	public Call<JsonObject> getLifeUsage(@Body Map<String, String> params);
+
+	/*
+	 * 보장성 보험 상품 조회
+	 */
+	@POST("/life/searchInsurance")
+	public Call<JsonObject> searchInsurance(@Body Map<String, String> params);
 
 	/*************************
 	 * 대중교통
 	 *************************/
 	/*
-	 * 대중교통 - 3339
+	 * 대중교통
 	 */
-	@POST("/life/getPublicTransfer")
+	@POST("/life/PublicTransfer")
 	public Call<JsonObject> getPublicTransfer(@Body Map<String, String> params);
 
 	/*************************
 	 * 전통시장
 	 *************************/
 	/*
-	 * 전통시장 - 3339
+	 * 전통시장 쓴 금액 조회
 	 */
-	@POST("/life/getTraditionalMarket")
-	public Call<JsonObject> getTraditionalMarket(@Body Map<String, String> params);
+	@POST("/life/culturePayment")
+	public Call<JsonObject> getCulturePayment(@Body Map<String, String> params);
 
+	/*
+	 * 신한은행 ATM 조회
+	 */
+	@POST("/bank/retailAtm")
+	public Call<JsonObject> getRetailAtm(@Body Map<String, String> params);
 
-
+	/*
+	 * 문화 조회 (전통시장과 좌표)
+	 */
+	@POST("/bank/culture")
+	public Call<JsonObject> getCultureList(@Body Map<String, String> params);
 
 	/*
 	// 샘플코드 ..
