@@ -66,7 +66,7 @@ public class SplashActivity extends AppCompatActivity {
 		Map params = new LinkedHashMap<>();
 		params.put("hpno", "01071444074");
 		DataResult dataResult = new DataResultImpl();
-		dataResult.getLifeUsage(new Callback<JsonObject>() {
+		dataResult.getName(new Callback<JsonObject>() {
 			@Override
 			public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 //				response.body.get("dataBody").getAsJsonObject().get("insuranceList").getAsJsonArray().get(0)
