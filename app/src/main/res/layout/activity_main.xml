@@ -41,6 +41,7 @@
 					android:layout_weight="1">
 
 					<TextView
+						android:id="@+id/tv_user_name"
 						style="@style/BlueTextViewStyle"
 						android:text="최서문"
 						android:textSize="19sp" />
@@ -48,7 +49,7 @@
 					<TextView
 						style="@style/PlainTextViewStyle"
 						android:layout_marginLeft="04dp"
-						android:text="님 13월 명세서 입니다."
+						android:text="님 연소득은 다음과 같습니다."
 						android:textSize="17sp" />
 				</LinearLayout>
 
@@ -66,6 +67,7 @@
 				android:gravity="center_horizontal|bottom">
 
 				<TextView
+					android:id="@+id/tv_total_money"
 					style="@style/PlainTextViewStyle"
 					android:text="1,000,000"
 					android:textSize="40sp" />
@@ -226,16 +228,19 @@
 						</LinearLayout>
 					</FrameLayout>
 
-					<ImageView
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
+					<TextView
+						android:background="@drawable/bg_radius_line_only"
+						android:layout_marginTop="08dp"
+						android:paddingLeft="12dp"
+						android:paddingRight="12dp"
 						android:layout_gravity="center_horizontal"
-						android:src="@drawable/txt_main_percent" />
+						android:text="13월의 급여혜택 달성률"
+						style="@style/BlueTextViewStyle" />
 
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="36dp">
+						android:layout_marginTop="30dp">
 
 						<LinearLayout
 							android:layout_width="0dp"
@@ -594,7 +599,7 @@
 				<!--카드공제-->
 
 				<!--주식공제-->
-				<LinearLayout
+				<!--<LinearLayout
 					android:id="@+id/ll_list_stock"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
@@ -677,7 +682,7 @@
 						</FrameLayout>
 
 					</LinearLayout>
-				</LinearLayout>
+				</LinearLayout>-->
 				<!--주식공제-->
 
 				<!--보험공제-->
@@ -971,7 +976,7 @@
 							<TextView
 								style="@style/PlainTextViewStyle"
 								android:layout_marginLeft="08dp"
-								android:text="IRP 공제"
+								android:text="연금계좌 공제"
 								android:textSize="15sp" />
 						</LinearLayout>
 
@@ -1116,7 +1121,7 @@
 				<!--주택청약공제-->
 
 				<!--펀드공제-->
-				<LinearLayout
+				<!--<LinearLayout
 					android:id="@+id/ll_list_fund"
 					style="@style/ElevationLinearLayoutStyle"
 					android:layout_marginLeft="16dp"
@@ -1199,7 +1204,7 @@
 						</FrameLayout>
 
 					</LinearLayout>
-				</LinearLayout>
+				</LinearLayout>-->
 				<!--펀드공제-->
 			</LinearLayout>
 		</LinearLayout>
