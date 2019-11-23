@@ -28,6 +28,7 @@ import com.shinhan.dos.bonus.Stock.StockInquiryActivity;
 import com.shinhan.dos.bonus.data.DataResult;
 import com.shinhan.dos.bonus.data.DataResultImpl;
 
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -55,11 +56,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private LinearLayout ll_list_market;
 	private LinearLayout ll_list_irp;
 	private LinearLayout ll_list_house;
-	private LinearLayout ll_list_fund;
+	//	private LinearLayout ll_list_fund;
 	private View progress_default;
+
+	private float mTotalMyDeduction = 0; // 공제총액
+	private float mTotalMyDeductionLimits = 0; // 공제가능금액
 
 	private String mCustomerName = "";
 	private int mSalary = 0;
+	private String mHpno = "";
 	private int mCreditAmount = 0;// 신용카드사용금액
 	private int mCheckAmount = 0;// 체크카드사용금액
 	private int cultureTotalAmount = 0; // 전통시장
@@ -81,14 +86,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		initView();
 
 		SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
 		SharedPreferences.Editor editor = pref.edit();
 		editor.putBoolean("initUser", false);
 		editor.commit();
 
-		setCirclePercent(80);
+		String salaryString = pref.getString("salary", "4000");
+		if (salaryString != null && salaryString.length() > 0) {
+			mSalary = Integer.parseInt(salaryString);
+		}
+
+		mHpno = pref.getString("hpno", "01071444074");
+		if (mHpno == null) {
+			mHpno = "01071444074";
+		}
+		mCustomerName = pref.getString("name", "최리나");
+		if (mCustomerName == null) {
+			mCustomerName = "";
+		}
+
+		initView();
 	}
 
 	private void initView() {
@@ -104,14 +122,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mLlMiddleStock = findViewById(R.id.ll_middle_stock);
 		mLlMiddleInsurance = findViewById(R.id.ll_middle_insurance);
 		ll_list_card = findViewById(R.id.ll_list_card);
-		ll_list_stock = findViewById(R.id.ll_list_stock);
+//		ll_list_stock = findViewById(R.id.ll_list_stock);
 		ll_list_insurance = findViewById(R.id.ll_list_insurance);
 		ll_list_bus = findViewById(R.id.ll_list_bus);
 		ll_list_market = findViewById(R.id.ll_list_market);
 		ll_list_irp = findViewById(R.id.ll_list_irp);
 		ll_list_house = findViewById(R.id.ll_list_house);
-		ll_list_fund = findViewById(R.id.ll_list_fund);
+//		ll_list_fund = findViewById(R.id.ll_list_fund);
 		progress_default = (View) findViewById(R.id.progress_default);
+		((TextView) findViewById(R.id.tv_total_money)).setText(commaMoney(mSalary) + "");
+		((TextView) findViewById(R.id.tv_user_name)).setText(mCustomerName);
 
 		iv_input_my = findViewById(R.id.iv_input_my_money);
 
@@ -120,13 +140,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mLlMiddleStock.setOnClickListener(this);
 		mLlMiddleInsurance.setOnClickListener(this);
 		ll_list_card.setOnClickListener(this);
-		ll_list_stock.setOnClickListener(this);
+//		ll_list_stock.setOnClickListener(this);
 		ll_list_insurance.setOnClickListener(this);
 		ll_list_bus.setOnClickListener(this);
 		ll_list_market.setOnClickListener(this);
 		ll_list_irp.setOnClickListener(this);
 		ll_list_house.setOnClickListener(this);
-		ll_list_fund.setOnClickListener(this);
+//		ll_list_fund.setOnClickListener(this);
 		iv_input_my.setOnClickListener(this);
 
 		final LinearLayout inner = findViewById(R.id.ll_middle_buttons);
@@ -155,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private void requestAllInfo() {
 		DataResult dataResult = new DataResultImpl();
 		Map params = new LinkedHashMap<>();
-		params.put("hpno", "01071444074"); // TODO Shared Preference에서 get
+		params.put("hpno", mHpno); // TODO Shared Preference에서 get
 		dataResult.getMainInfo(new Callback<JsonObject>() {
 			@Override
 			public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -179,27 +199,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mTvPercent.setText(percent + "");
 	}
 
+	private void setTotalAmoumts() {
+		((TextView) findViewById(R.id.tv_total_deduction)).setText(commaMoney(Math.round(mTotalMyDeduction)) + " 만원"); // 총 공제금액
+		((TextView) findViewById(R.id.tv_available_deduction_amt)).setText(commaMoney(Math.round(mTotalMyDeductionLimits)) + " 만원"); // 공제가능금액
+
+		float rate = (float) ((float) mTotalMyDeduction / (float) mTotalMyDeductionLimits);
+		int percent = Math.round(rate * 100);
+		setCirclePercent(percent);
+	}
+
 	/**
 	 * 카드 & 현금 공제
 	 */
 	private void setCardAndMoneyResult() {
-		mSalary = 80000000; // TODO : REAL DATA
 		setUserMoneyInfo();
 
 		drawFirstMoneyView();
 		drawSecondMoneyView();
 		drawThirdMoneyView();
-		drawStockView();
+//		drawStockView();
 		drawBusView();
 		drawInsuranceView();
 		drawMarketView();
 		drawIrpView();
 		drawHouseView();
-		drawFundView();
+//		drawFundView();
+
+		setTotalAmoumts();
 	}
 
 	private void setUserMoneyInfo() {
-		mCustomerName = mResultData.get("customerName").getAsString();
 		String phoneNumber = mResultData.get("phoneNumber").getAsString();
 		mCheckAmount = Integer.parseInt(mResultData.get("checkCardTotalAmount").getAsString());
 		mCreditAmount = Integer.parseInt(mResultData.get("creditCardTotalAmount").getAsString()) + Integer.parseInt(mResultData.get("cashTotalAmount").getAsString());
@@ -315,11 +344,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			((View) findViewById(R.id.progress_card3)).requestLayout();
 			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(dataMoney1 + dataMoney2) + "");
 //			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(dataMoney1) + ", " + moneyToManwon(dataMoney2));
+			mTotalMyDeduction += moneyToManwon(dataMoney1 + dataMoney2);
 		} else {
 			((TextView) findViewById(R.id.tv_amt3)).setText(moneyToManwon(maxMoney) + "");
+			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 		((TextView) findViewById(R.id.tv_max3)).setText(" / " + moneyToManwon(maxMoney) + "");
+
+		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
+/*
 
 	private void drawStockView() {
 		float maxMoney = 0;
@@ -344,12 +378,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 공제 전
 			((View) findViewById(R.id.progress_stock)).getLayoutParams().width = (int) (progressWidth * percent);
 			((View) findViewById(R.id.progress_stock)).requestLayout();
+//			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_stock)).setText(moneyToManwon(maxMoney) + "");
+//			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
 		((TextView) findViewById(R.id.tv_max_stock)).setText(" / " + moneyToManwon(maxMoney));
+//		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
+*/
 
 	private void drawInsuranceView() {
 		float maxMoney = (float) (1000000 * 0.132);
@@ -361,11 +399,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 공제 전
 			((View) findViewById(R.id.progress_insurance)).getLayoutParams().width = (int) (progressWidth * percent);
 			((View) findViewById(R.id.progress_insurance)).requestLayout();
+			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_insurance)).setText(moneyToManwon(maxMoney) + "");
+			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
 		((TextView) findViewById(R.id.tv_max_insurance)).setText(" / " + moneyToManwon(maxMoney));
+		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
 
 	private void drawBusView() {
@@ -378,11 +419,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 공제 전
 			((View) findViewById(R.id.progress_bus)).getLayoutParams().width = (int) (progressWidth * percent);
 			((View) findViewById(R.id.progress_bus)).requestLayout();
+			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_bus)).setText(moneyToManwon(maxMoney) + "");
+			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
 		((TextView) findViewById(R.id.tv_max_bus)).setText(" / " + moneyToManwon(maxMoney));
+		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
 
 	private void drawMarketView() {
@@ -395,11 +439,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 공제 전
 			((View) findViewById(R.id.progress_market)).getLayoutParams().width = (int) (progressWidth * percent);
 			((View) findViewById(R.id.progress_market)).requestLayout();
+			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_market)).setText(moneyToManwon(maxMoney) + "");
+			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
 		((TextView) findViewById(R.id.tv_max_market)).setText(" / " + moneyToManwon(maxMoney));
+		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
 
 	private void drawIrpView() {
@@ -443,11 +490,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 공제 전
 			((View) findViewById(R.id.progress_irp)).getLayoutParams().width = (int) (progressWidth * percent);
 			((View) findViewById(R.id.progress_irp)).requestLayout();
+			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_irp)).setText(moneyToManwon(maxMoney) + "");
+			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
 		((TextView) findViewById(R.id.tv_max_irp)).setText(" / " + moneyToManwon(maxMoney));
+		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
 
 	private void drawHouseView() {
@@ -460,12 +510,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 공제 전
 			((View) findViewById(R.id.progress_house)).getLayoutParams().width = (int) (progressWidth * percent);
 			((View) findViewById(R.id.progress_house)).requestLayout();
+			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_house)).setText(moneyToManwon(maxMoney) + "");
+			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
 		((TextView) findViewById(R.id.tv_max_house)).setText(" / " + moneyToManwon(maxMoney));
+		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
+/*
 
 	private void drawFundView() {
 		float maxMoney = (float) (3000000 * 0.1);
@@ -477,12 +531,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			// 공제 전
 			((View) findViewById(R.id.progress_fund)).getLayoutParams().width = (int) (progressWidth * percent);
 			((View) findViewById(R.id.progress_fund)).requestLayout();
+			mTotalMyDeduction += moneyToManwon(dataMoney);
 		} else {
 			((TextView) findViewById(R.id.tv_amt_fund)).setText(moneyToManwon(maxMoney) + "");
+			mTotalMyDeduction += moneyToManwon(maxMoney);
 		}
 
 		((TextView) findViewById(R.id.tv_max_fund)).setText(" / " + moneyToManwon(maxMoney));
+		mTotalMyDeductionLimits += moneyToManwon(maxMoney);
 	}
+*/
 
 	private int getScreenSize() {
 		DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -515,6 +573,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		return moneyManwonInt;
 	}
 
+	private String commaMoney(int money) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String formattedAmt = formatter.format(money);
+		return formattedAmt;
+	}
+
 	@Override
 	public void onClick(View v) {
 		int viewId = v.getId();
@@ -542,10 +606,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
 				startActivity(intent);
 				break;
-			case R.id.ll_list_stock:
+			/*case R.id.ll_list_stock:
 				intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
 				startActivity(intent);
-				break;
+				break;*/
 			case R.id.ll_list_insurance:
 				intent = new Intent(MainActivity.this, PlusMoneyActivity.class);
 				startActivity(intent);
@@ -560,11 +624,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				/*intent = new Intent(MainActivity.this, InsuranceInquiryActivity.class);
 				startActivity(intent);*/
 				break;
-			case R.id.ll_list_fund:
+			/*case R.id.ll_list_fund:
 				// TODO
-				/*intent = new Intent(MainActivity.this, InsuranceInquiryActivity.class);
-				startActivity(intent);*/
-				break;
+				*//*intent = new Intent(MainActivity.this, InsuranceInquiryActivity.class);
+				startActivity(intent);*//*
+				break;*/
 			case R.id.ll_list_house:
 				// TODO
 				/*intent = new Intent(MainActivity.this, InsuranceInquiryActivity.class);
