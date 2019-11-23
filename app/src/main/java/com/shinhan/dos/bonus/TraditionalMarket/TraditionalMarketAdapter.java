@@ -62,6 +62,10 @@ public class TraditionalMarketAdapter extends RecyclerView.Adapter<TraditionalMa
         double x = traditionalMarketData.getX();
         double y = traditionalMarketData.getY();
 
+        double distance = Double.parseDouble(String.format("%.1f",traditionalMarketData.getDistance()));
+
+        holder.distance.setText(distance+"KM");
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,11 +1,15 @@
 package com.shinhan.dos.bonus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.shinhan.dos.bonus.data.DataResult;
@@ -14,6 +18,8 @@ import com.shinhan.dos.bonus.data.DataResultImpl;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,9 +70,11 @@ public class SplashActivity extends AppCompatActivity {
 		}, params);
 	}
 
+
 	private void goToMainActivity() {
 		Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 		startActivity(intent);
 		finish();
 	}
+
 }

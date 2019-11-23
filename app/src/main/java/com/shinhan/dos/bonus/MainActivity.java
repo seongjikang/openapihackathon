@@ -143,8 +143,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				break;
 			case R.id.ll_middle_gps:
 				// TODO
-				/*intent = new Intent(MainActivity.this, InsuranceInquiryActivity.class);
-				startActivity(intent);*/
+				intent = new Intent(MainActivity.this, TraditionalMarketActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.ll_middle_stock:
 				intent = new Intent(MainActivity.this, StockInquiryActivity.class);
